@@ -2337,6 +2337,11 @@ array-includes@^3.1.1, array-includes@^3.1.2:
     get-intrinsic "^1.1.1"
     is-string "^1.0.5"
 
+array-parallel@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/array-parallel/-/array-parallel-0.1.3.tgz#8f785308926ed5aa478c47e64d1b334b6c0c947d"
+  integrity sha1-j3hTCJJu1apHjEfmTRszS2wMlH0=
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
@@ -6985,6 +6990,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+matches-selector@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/matches-selector/-/matches-selector-1.2.0.tgz#d1814e7e8f43e69d22ac33c9af727dc884ecf12a"
+  integrity sha512-c4vLwYWyl+Ji+U43eU/G5FwxWd4ZH0ePUsFs5y0uwD9HUEFBXUQ1zUUan+78IpRD+y4pUfG0nAzNM292K7ItvA==
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -8716,6 +8726,11 @@ promise-inflight@^1.0.1:
   resolved "https://registry.yarnpkg.com/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
   integrity sha1-mEcocL8igTL8vdhoEputEsPAKeM=
 
+promise-polyfill@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.2.0.tgz#367394726da7561457aba2133c9ceefbd6267da0"
+  integrity sha512-k/TC0mIcPVF6yHhUvwAp7cvL6I2fFV7TzF1DuGPI8mBh4QQazf36xCKEHKTZKRysEoTQoQdKyP25J8MPJp7j5g==
+
 promise@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/promise/-/promise-8.1.0.tgz#697c25c3dfe7435dd79fcd58c38a135888eaf05e"
@@ -8906,6 +8921,15 @@ react-app-polyfill@^2.0.0:
     raf "^3.4.1"
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
+
+react-awesome-stars-rating@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-awesome-stars-rating/-/react-awesome-stars-rating-0.3.0.tgz#d04278c6fd3879726b1ad172ea5fcc4cfcce4204"
+  integrity sha512-7pN3KNSAuUjBhG9Cal7wlfgVROguY4QwrP3VkZRdMXa2BZCcgd4oX87x9+UyKyLrfe/yujE6X/4csA78zV/t2Q==
+  dependencies:
+    prop-types "^15.7.2"
+    react "^17.0.1"
+    react-dom "^17.0.1"
 
 react-dev-utils@^11.0.3:
   version "11.0.4"
@@ -9748,6 +9772,16 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
+shufflejs@^5.2.3:
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/shufflejs/-/shufflejs-5.2.3.tgz#67bd133b835ca728a1432b4be2eec821cc890d94"
+  integrity sha512-x/vb3Kdyb5X4GykbdOS49EU34jtMag2aYODL/z0nWT0DVFpWNk08xVeonKSMZnH4/piSWLjCkn4296BlxhvDnw==
+  dependencies:
+    array-parallel "^0.1.3"
+    matches-selector "^1.0.0"
+    throttleit "^1.0.0"
+    tiny-emitter "^2.1.0"
+
 side-channel@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/side-channel/-/side-channel-1.0.4.tgz#efce5c8fdc104ee751b25c58d4290011fa5ea2cf"
@@ -10400,6 +10434,11 @@ throat@^5.0.0:
   resolved "https://registry.yarnpkg.com/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
 
+throttleit@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
+  integrity sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
+
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
@@ -10424,6 +10463,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tiny-emitter@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  integrity sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==
 
 tmpl@1.0.x:
   version "1.0.4"
