@@ -1,13 +1,251 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+.grid-container {
+    display: flex;
+}
+
+.item__image {
+    padding: 1em;
+}
+
+.item__image img {
+    width: 100%;
+}
+
+.meta {
+    position: relative;
+    margin: 10px 0 0;
+    padding: 0 60px 0 0;
+    text-align: left;
+}
+
+.meta__by {
+    font-size: .85em;
+    font-weight: bold;
+    display: block;
+    color: #595b64;
+}
+
+.meta__title {
+    font-size: .95em;
+    font-weight: bold;
+    margin: 0;
+    padding: .4em 0 .1em;
+}
+
+.meta__stars {
+    font-size: .95em;
+    color: #595b64;
+}
+
+.price-ticker-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    margin-left: .5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    align-items: center;
+}
+
+.ticker-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1.75rempx;
+    object-fit: contain;
+}
+
+.price-ticker-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.coin-name {
+    margin: 0;
+    margin-left: .5rem;
+    font-size: .75rem;
+    line-height: 1rem;
+    font-weight: 700;
+}
+
+.coin-price-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: -0.5rem;
+}
+
+.coin-price {
+    margin: 0;
+    margin-left: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+}
+
+.price-indicator {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    user-select: none;
+}
+
+.percentage-change {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+}
+
+.text-red {
+    color: rgb(219, 105, 105);
+}
+
+.text-green {
+    color: rgb(81, 146, 81);
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.search {
+    display: flex;
+}
+
+.search-container {
+    color: gray;
+    position: relative;
+}
+
+.search-input {
+    background-color: gray;
+    height: 2.5rem;
+    width: 100%;
+    border-radius: .5rem;
+    /* box-shadow: ; */
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0.75rem;
+    margin-right: 1rem;
+}
+
+.search-icon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.navbar-container {
+    display: flex;
+    background-color: darkgrey;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+}
+
+.navbar {
+    width: 100%;
+    height: 5rem;
+    /* box shadow */
+    /* background-color: ; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    padding: .5rem;
+}
+
+.logo {
+    display: flex;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.logo div {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.header {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search {
+    display: flex;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid__item {
+    flex-basis: calc(100% / 6);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkgrey;
+    /* box-shadow: ; */
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.footer a:hover {
+    color: grey;
+}
+
+.copyright {
+    margin-bottom: .5rem;
+}
+
+.flex {
+    display: flex;
 }
