@@ -19,7 +19,7 @@ class Navbar extends React.Component {
                         <PriceTicker icon="logo512.png" price="1.2334" coin="$REACT" increase={true} change="17.34%" />
                     </div>
                     <div className="profile-container">
-                        <button className="btn">Login</button>
+                        <button className="btn btn-login">Login</button>
                     </div>
                 </div>
             </div>
