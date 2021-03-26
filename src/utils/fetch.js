@@ -8,7 +8,7 @@ export default (typeof fetch == 'function' ?
         return new Promise((res, rej) => {
             const req = new XMLHttpRequest();
             req.open(options.method || 'get', url);
-            req.withCredentials = options.credentials == 'include';
+            req.withCredentials = options.credentials === 'include';
 
             for (let k in options.headers || {}) {
                 req.setRequestHeader(k, options.headers[k]);
