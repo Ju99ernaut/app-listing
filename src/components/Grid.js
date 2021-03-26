@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from './Loader';
 import Item from './Item';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
@@ -8,6 +9,7 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = React.createRef();
+        this.loader = React.createRef();
         this.search = React.createRef();
         this.element = React.createRef();
         this.sizer = React.createRef();
@@ -19,7 +21,7 @@ class Navbar extends React.Component {
     }
 
     componentDidUpdate() {
-        this.shuffle.resetItems()
+        this.shuffle.resetItems();
     }
 
     componentWillUnmount() {
@@ -33,15 +35,16 @@ class Navbar extends React.Component {
             sizer: this.sizer.current,
             speed: 600,
             columnThreshold: .04,
-            gutterWidth: 5,
             buffer: 1
         });
+        shuffle.layout();
 
         window.addEventListener('resize', throttle(function (ev) {
             shuffle.layout();
         }, 50));
 
         this.shuffle = shuffle;
+        this.loader.current.style.display = 'none';
     }
 
     filter = (e, filter) => {
@@ -75,8 +78,11 @@ class Navbar extends React.Component {
     render() {
         return (
             <div className="grid-container">
+                <div ref={this.loader} className="loader">
+                    <Loader />
+                </div>
                 <div className="header">
-                    <div className="filters" ref={this.buttons}>
+                    <div ref={this.buttons} className="filters">
                         <button onClick={e => this.filter(e)} className="btn btn-active">All</button>
                         <button onClick={e => this.filter(e, 'twitch')} className="btn">Twitch</button>
                         <button onClick={e => this.filter(e, 'discord')} className="btn">Discord</button>
