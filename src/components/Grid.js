@@ -1,30 +1,96 @@
 import React from 'react';
 import Item from './Item';
+import Shuffle from 'shufflejs';
+import throttle from '../utils/throttle';
+import imagesLoaded from '../utils/imagesLoaded';
 
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
-        this.a = "a";
+        this.buttons = React.createRef();
+        this.search = React.createRef();
+        this.element = React.createRef();
+        this.sizer = React.createRef();
+    }
+
+    componentDidMount() {
+        imagesLoaded(this.element.current, this._initShuffle);
+        this.addSearchEvent();
+    }
+
+    componentDidUpdate() {
+        this.shuffle.resetItems()
+    }
+
+    componentWillUnmount() {
+        this.shuffle.destroy();
+        this.shuffle = null;
+    }
+
+    _initShuffle = () => {
+        const shuffle = new Shuffle(this.element.current, {
+            itemSelector: '.grid__item',
+            sizer: this.sizer.current,
+            speed: 600,
+            columnThreshold: .04,
+            gutterWidth: 5,
+            buffer: 1
+        });
+
+        window.addEventListener('resize', throttle(function (ev) {
+            shuffle.layout();
+        }, 50));
+
+        this.shuffle = shuffle;
+    }
+
+    filter = (e, filter) => {
+        this._activateButton(e)
+        if (filter) this.shuffle.filter(filter);
+        else this.shuffle.filter();
+        this.shuffle.layout();
+    }
+
+    addSearchEvent = () => {
+        this.search.current.addEventListener('keyup', this._handleSearchKeyup);
+    }
+
+    _activateButton = e => {
+        const btns = this.buttons.current.querySelectorAll('button');
+        btns.forEach(btn => btn.classList.remove('btn-active'));
+        e.currentTarget.classList.add('btn-active');
+    }
+
+    _handleSearchKeyup = e => {
+        const searchText = e.target.value.toLowerCase();
+
+        this.shuffle.filter(function (element, shuffle) {
+            const titleElement = element.querySelector('.meta__title');
+            const titleText = titleElement.textContent.toLowerCase().trim();
+
+            return titleText.indexOf(searchText) !== -1;
+        });
     }
 
     render() {
         return (
             <div className="grid-container">
                 <div className="header">
-                    <div className="filters">
-                        <button className="btn">Twitch</button>
-                        <button className="btn">Discord</button>
-                        <button className="btn">Facebook</button>
-                        <button className="btn">Bots</button>
-                        <button className="btn">Tools</button>
-                        <button className="btn">Viewers Interaction</button>
+                    <div className="filters" ref={this.buttons}>
+                        <button onClick={e => this.filter(e)} className="btn btn-active">All</button>
+                        <button onClick={e => this.filter(e, 'twitch')} className="btn">Twitch</button>
+                        <button onClick={e => this.filter(e, 'discord')} className="btn">Discord</button>
+                        <button onClick={e => this.filter(e, 'facebook')} className="btn">Facebook</button>
+                        <button onClick={e => this.filter(e, 'bots')} className="btn">Bots</button>
+                        <button onClick={e => this.filter(e, 'tools')} className="btn">Tools</button>
+                        <button onClick={e => this.filter(e, 'interactions')} className="btn">Viewers Interaction</button>
                     </div>
-                    <div className="search">
+                    <div className="flex">
                         <div className="search-container">
-                            <input type="search" name="serch" placeholder="Search app..." className="xl:w-64 search-input" />
+                            <input ref={this.search} type="search" name="serch" placeholder="Search app..." className="search-input" />
                             <button type="submit" className="search-button">
                                 <svg
-                                    class="search-icon"
+                                    className="search-icon"
                                     fill="currentColor"
                                     viewBox="0 0 56.966 56.966"
                                     style={{ enableBackground: 'new 0 0 56.966 56.966' }}
@@ -36,17 +102,18 @@ class Navbar extends React.Component {
                         <button className="btn">My Profile</button>
                     </div>
                 </div>
-                <div className="grid">
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={4.5} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={4} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={5} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={2} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={3.5} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={4.5} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={4} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={5} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={2} />
-                    <Item img="logo512.png" title="X-men" by="Ju99ernaut" rating={3.5} />
+                <div ref={this.element} className="grid">
+                    <div ref={this.sizer} className="grid__sizer"></div>
+                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item img="logo512.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item img="logo512.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item img="logo512.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item img="logo512.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item img="logo512.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
                 </div>
             </div>
         );
