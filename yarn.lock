@@ -4116,6 +4116,11 @@ domhandler@^2.3.0:
   dependencies:
     domelementtype "1"
 
+domkit@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/domkit/-/domkit-0.0.3.tgz#f75bac993c72c1f2561f714a4e4de5d57354af73"
+  integrity sha512-3Rb5Nop7y3VGXBHZizoC8f8EXjKmM3zW0BA7XDYC0iTljhaJSA4z6vawNSYS7yFN0a2QFoLBMZFUkfPEZWzthg==
+
 domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
