@@ -64,6 +64,7 @@ class Navbar extends React.Component {
                     </div>
                     <div className="profile-container">
                         <button className="btn btn-login">Login</button>
+                        <button className="btn btn-login">Register</button>
                     </div>
                 </div>
             </div>
