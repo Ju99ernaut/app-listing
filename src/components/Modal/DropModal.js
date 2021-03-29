@@ -77,7 +77,7 @@ const hideModalAnimation = animation.hideModalAnimation;
 const showBackdropAnimation = animation.showBackdropAnimation;
 const hideBackdropAnimation = animation.hideBackdropAnimation;
 const showContentAnimation = animation.showContentAnimation;
-const hideContentAnimation = animation.hideContentAnimation;
+//const hideContentAnimation = animation.hideContentAnimation;
 
 const DropModal = modalFactory({
     getRef: (willHidden) => {
