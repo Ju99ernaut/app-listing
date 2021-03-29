@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     this.mdlLogin = React.createRef();
     this.mdlRegister = React.createRef();
+    this.mdlList = React.createRef();
     this.mdlProfile = React.createRef();
     this.formLogin = React.createRef();
     this.formRegister = React.createRef();
@@ -38,6 +39,14 @@ class App extends React.Component {
 
   hideMdlReg = () => {
     this.mdlRegister.current.hide();
+  }
+
+  showMdlList = () => {
+    this.mdlList.current.show();
+  }
+
+  hideMdlList = () => {
+    this.mdlList.current.hide();
   }
 
   showMdlProfile = () => {
@@ -116,7 +125,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar username={this.state.username} loginMd={this.showMdlLogin} regMd={this.showMdlReg} profileMd={this.showMdlProfile} logout={this.logout} />
+        <Navbar username={this.state.username} loginMd={this.showMdlLogin} regMd={this.showMdlReg} listMd={this.showMdlList} profileMd={this.showMdlProfile} logout={this.logout} />
         <Grid profileMd={this.showMdlProfile} />
         <Footer />
         <Modal ref={this.mdlLogin} keyboard={true}>
@@ -152,6 +161,10 @@ class App extends React.Component {
             <input type="submit" value="Register" />
           </form>
           <button name="close" onClick={this.hideMdlReg}>Close</button>
+        </Modal>
+        <Modal ref={this.mdlList} keyboard={true}>
+          <h2>List App</h2>
+          <button name="close" onClick={this.hideMdlList}>Close</button>
         </Modal>
         <Modal ref={this.mdlProfile} keyboard={true}>
           <h2>User Profile</h2>

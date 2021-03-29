@@ -1,4 +1,4 @@
-const Dropdown = ({ hidden, username, profile, logout }) => {
+const Dropdown = ({ hidden, username, list, profile, logout }) => {
     return (
         <div className="dropdown" style={{ display: hidden ? 'none' : '' }}>
             <div className="link">
@@ -6,6 +6,9 @@ const Dropdown = ({ hidden, username, profile, logout }) => {
             </div>
             <div onClick={profile} className="link">
                 Profile
+            </div>
+            <div onClick={list} className="link">
+                List App
             </div>
             <div onClick={logout} className="link">
                 Logout
