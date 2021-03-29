@@ -93,13 +93,13 @@ class Navbar extends React.Component {
                 </div>
                 <div className="header">
                     <div ref={this.buttons} className="filters">
-                        <button onClick={e => this.filter(e)} className="btn btn-active">All</button>
-                        <button onClick={e => this.filter(e, 'twitch')} className="btn">Twitch</button>
-                        <button onClick={e => this.filter(e, 'discord')} className="btn">Discord</button>
-                        <button onClick={e => this.filter(e, 'facebook')} className="btn">Facebook</button>
-                        <button onClick={e => this.filter(e, 'bots')} className="btn">Bots</button>
-                        <button onClick={e => this.filter(e, 'tools')} className="btn">Tools</button>
-                        <button onClick={e => this.filter(e, 'interactions')} className="btn">Viewers Interaction</button>
+                        <button name="all" onClick={e => this.filter(e)} className="btn btn-active">All</button>
+                        <button name="twitch" onClick={e => this.filter(e, 'twitch')} className="btn">Twitch</button>
+                        <button name="discord" onClick={e => this.filter(e, 'discord')} className="btn">Discord</button>
+                        <button name="facebook" onClick={e => this.filter(e, 'facebook')} className="btn">Facebook</button>
+                        <button name="bots" onClick={e => this.filter(e, 'bots')} className="btn">Bots</button>
+                        <button name="tools" onClick={e => this.filter(e, 'tools')} className="btn">Tools</button>
+                        <button name="interaction" onClick={e => this.filter(e, 'interactions')} className="btn">Viewers Interaction</button>
                     </div>
                     <div className="flex">
                         <div className="search-container">
@@ -110,7 +110,7 @@ class Navbar extends React.Component {
                                 </svg>
                             </button>
                         </div>
-                        <button onClick={this.props.profileMd} className="btn">My Profile</button>
+                        <button name="profile" onClick={this.props.profileMd} className="btn">My Profile</button>
                     </div>
                 </div>
                 <div ref={this.element} className="grid">
@@ -128,7 +128,7 @@ class Navbar extends React.Component {
                 </div>
                 <Modal ref={this.mdlApp} keyboard={true}>
                     <h2>App Data Expanded</h2>
-                    <button onClick={this.hideMdlApp}>Close</button>
+                    <button name="close" onClick={this.hideMdlApp}>Close</button>
                 </Modal>
             </div>
         );

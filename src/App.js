@@ -132,7 +132,7 @@ class App extends React.Component {
             </label><br /><br />
             <input type="submit" value="Login" />
           </form>
-          <button onClick={this.hideMdlLogin}>Close</button>
+          <button name="close" onClick={this.hideMdlLogin}>Close</button>
         </Modal>
         <Modal ref={this.mdlRegister} keyboard={true}>
           <h2>Register</h2>
@@ -151,11 +151,11 @@ class App extends React.Component {
             </label><br /><br />
             <input type="submit" value="Register" />
           </form>
-          <button onClick={this.hideMdlReg}>Close</button>
+          <button name="close" onClick={this.hideMdlReg}>Close</button>
         </Modal>
         <Modal ref={this.mdlProfile} keyboard={true}>
           <h2>User Profile</h2>
-          <button onClick={this.hideMdlProfile}>Close</button>
+          <button name="close" onClick={this.hideMdlProfile}>Close</button>
         </Modal>
       </div>
     );
