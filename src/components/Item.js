@@ -1,8 +1,8 @@
 import Stars from './Stars';
 
-const Item = ({ groups, img, title, by, rating }) => {
+const Item = ({ groups, img, title, by, rating, appMd }) => {
     return (
-        <div className="grid__item" data-groups={groups}>
+        <div onClick={appMd} className="grid__item" data-groups={groups}>
             <div className="item__image"><img src={img} alt="Dummy" /></div>
             <div className="meta">
                 <h3 className="meta__title">{title}</h3>

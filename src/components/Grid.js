@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from './Loader';
 import Item from './Item';
+import Modal from './Modal';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
 import imagesLoaded from '../utils/imagesLoaded';
@@ -13,6 +14,7 @@ class Navbar extends React.Component {
         this.search = React.createRef();
         this.element = React.createRef();
         this.sizer = React.createRef();
+        this.mdlApp = React.createRef();
     }
 
     componentDidMount() {
@@ -27,6 +29,14 @@ class Navbar extends React.Component {
     componentWillUnmount() {
         this.shuffle.destroy();
         this.shuffle = null;
+    }
+
+    showMdlApp = () => {
+        this.mdlApp.current.show();
+    }
+
+    hideMdlApp = () => {
+        this.mdlApp.current.hide();
     }
 
     _initShuffle = () => {
@@ -105,22 +115,26 @@ class Navbar extends React.Component {
                                 </svg>
                             </button>
                         </div>
-                        <button className="btn">My Profile</button>
+                        <button onClick={this.props.profileMd} className="btn">My Profile</button>
                     </div>
                 </div>
                 <div ref={this.element} className="grid">
                     <div ref={this.sizer} className="grid__sizer"></div>
-                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item img="logo512.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item img="logo512.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
-                    <Item img="logo512.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item img="logo512.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item img="logo512.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
                 </div>
+                <Modal ref={this.mdlApp} keyboard={true}>
+                    <h2>App Data Expanded</h2>
+                    <button onClick={this.hideMdlApp}>Close</button>
+                </Modal>
             </div>
         );
     }

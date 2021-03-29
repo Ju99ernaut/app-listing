@@ -63,8 +63,8 @@ class Navbar extends React.Component {
                         <PriceTicker icon="RLY.svg" coin="$RLY" price={this.state.price} increase={this.state.increase} change={this.state.change} />
                     </div>
                     <div className="profile-container">
-                        <button className="btn btn-login">Login</button>
-                        <button className="btn btn-login">Register</button>
+                        <button onClick={this.props.loginMd} className="btn btn-login">Login</button>
+                        <button onClick={this.props.regMd} className="btn btn-login">Register</button>
                     </div>
                 </div>
             </div>
