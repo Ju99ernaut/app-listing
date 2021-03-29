@@ -116,7 +116,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar loginMd={this.showMdlLogin} regMd={this.showMdlReg} />
+        <Navbar username={this.state.username} loginMd={this.showMdlLogin} regMd={this.showMdlReg} profileMd={this.showMdlProfile} logout={this.logout} />
         <Grid profileMd={this.showMdlProfile} />
         <Footer />
         <Modal ref={this.mdlLogin} keyboard={true}>

@@ -190,6 +190,39 @@ code {
     cursor: pointer;
 }
 
+.dropdown {
+    position: absolute;
+    background-color: var(--secondary-background);
+    margin-top: .25rem;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+    color: var(--primary-color);
+    border-radius: .5rem;
+    width: 12rem;
+    top: 5rem;
+    right: 0;
+    margin-right: .5rem;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+}
+
+.dropdown .link {
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.dropdown .link:hover {
+    background-color: var(--secondary-color);
+}
+
 /* PRICE TICKER */
 .price-ticker-container {
     display: flex;
