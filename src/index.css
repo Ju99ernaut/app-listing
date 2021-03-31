@@ -113,6 +113,7 @@ code {
 }
 
 .btn {
+    height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.1);
     outline: none;
     margin-right: .5rem;
@@ -203,6 +204,7 @@ code {
     margin-right: .5rem;
     padding-top: 1rem;
     padding-bottom: .5rem;
+    animation: zoomin 0.1s ease-in-out;
 }
 
 .dropdown .link {
@@ -438,6 +440,51 @@ code {
     animation-delay: -0.2s;
 }
 
+/* MODAL */
+.modal {
+    background-color: var(--secondary-color);
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    width: 12rem;
+    padding: 1rem;
+}
+
+.btn-close {
+    position: absolute;
+    height: auto;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: transparent;
+    border: none;
+}
+
+h2 {
+    text-align: center;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: .5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 96%;
+}
+
+input[type="submit"] {}
+
 @keyframes wave {
     from {
         transform: translateY(-100%);
@@ -445,6 +492,16 @@ code {
 
     to {
         transform: translateY(100%);
+    }
+}
+
+@keyframes zoomin {
+    from {
+        transform: scale(0.3);
+    }
+
+    to {
+        transform: scale(1);
     }
 }
 
