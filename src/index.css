@@ -344,9 +344,13 @@ code {
 }
 
 /* CARD CHILD ELEMENTS */
-.item__image img {
-    width: 100%;
-    max-height: 150px;
+.item__image {
+    margin: -0.75rem;
+    margin-top: 0;
+    height: 10rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .meta {
@@ -374,6 +378,16 @@ code {
     font-size: .95em;
     color: #595b64;
     margin-top: .5rem;
+}
+
+/* APP DETAILED */
+.app-image {
+    display: flex;
+    align-items: center;
+}
+
+.app-image img {
+    max-width: 500px;
 }
 
 /* FOOTER */
