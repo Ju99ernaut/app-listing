@@ -126,9 +126,9 @@ class Navbar extends React.Component {
                     <Item appMd={this.showMdlApp} img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
                     <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
                 </div>
-                <Modal ref={this.mdlApp} keyboard={true}>
+                <Modal ref={this.mdlApp} className="modal" keyboard={true}>
                     <h2>App Data Expanded</h2>
-                    <button name="close" onClick={this.hideMdlApp}>Close</button>
+                    <button name="close" className="btn btn-close" onClick={this.hideMdlApp}>×</button>
                 </Modal>
             </div>
         );

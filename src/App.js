@@ -14,6 +14,7 @@ class App extends React.Component {
     this.mdlProfile = React.createRef();
     this.formLogin = React.createRef();
     this.formRegister = React.createRef();
+    this.formList = React.createRef();
     this.state = {
       token: null,
       username: null,
@@ -77,6 +78,16 @@ class App extends React.Component {
     this.hideMdlReg();
   }
 
+  submitListing = e => {
+    e.preventDefault();
+    fetch('/listings', { method: 'POST', body: new FormData(this.formList.current) })
+      .then(res => res.json())
+      .then(res => console.log(res))
+      .catch(err => console.log("Networt error"));
+    this.formList.current.reset();
+    this.hideMdlReg();
+  }
+
   login = () => { }
 
   register = () => { }
@@ -128,47 +139,47 @@ class App extends React.Component {
         <Navbar username={this.state.username} loginMd={this.showMdlLogin} regMd={this.showMdlReg} listMd={this.showMdlList} profileMd={this.showMdlProfile} logout={this.logout} />
         <Grid profileMd={this.showMdlProfile} />
         <Footer />
-        <Modal ref={this.mdlLogin} keyboard={true}>
+        <Modal ref={this.mdlLogin} className="modal" keyboard={true}>
           <h2>Login</h2>
           <form ref={this.formLogin} onSubmit={this.submitLogin}>
-            <label>
-              Username:<br />
-              <input type="text" id="username" name="username" placeholder="John" required />
-            </label><br />
-            <label>
-              Password:<br />
-              <input type="password" id="password" name="password" placeholder="password" required />
-            </label><br /><br />
+            <input type="text" id="username" name="username" placeholder="username" required />
+            <input type="password" id="password" name="password" placeholder="password" required />
             <input type="submit" value="Login" />
           </form>
-          <button name="close" onClick={this.hideMdlLogin}>Close</button>
+          <button name="close" className="btn btn-close" onClick={this.hideMdlLogin}>×</button>
         </Modal>
-        <Modal ref={this.mdlRegister} keyboard={true}>
+        <Modal ref={this.mdlRegister} className="modal" keyboard={true}>
           <h2>Register</h2>
           <form ref={this.formRegister} onSubmit={this.submitReg}>
-            <label>
-              Username:<br />
-              <input type="text" id="username2" name="username2" placeholder="John" required />
-            </label><br />
-            <label>
-              Email:<br />
-              <input type="text" id="email" name="email" placeholder="john@doe.com" />
-            </label><br />
-            <label>
-              Password:<br />
-              <input type="password" id="password2" name="password2" placeholder="password" />
-            </label><br /><br />
+            <input type="text" id="username2" name="username2" placeholder="username" required />
+            <input type="text" id="email" name="email" placeholder="email" />
+            <input type="password" id="password2" name="password2" placeholder="password" />
             <input type="submit" value="Register" />
           </form>
-          <button name="close" onClick={this.hideMdlReg}>Close</button>
+          <button name="close" className="btn btn-close" onClick={this.hideMdlReg}>×</button>
         </Modal>
-        <Modal ref={this.mdlList} keyboard={true}>
+        <Modal ref={this.mdlList} className="modal" keyboard={true}>
           <h2>List App</h2>
-          <button name="close" onClick={this.hideMdlList}>Close</button>
+          <form ref={this.formList} onSubmit={this.submitListing}>
+            <input type="text" id="title" name="title" placeholder="title" required />
+            <input type="text" id="image" name="image" placeholder="image url" required />
+            <textarea name="description" id="description" placeholder="description" required></textarea>
+            <input type="text" id="by" name="by" placeholder="by" required />
+            <select id="groups" data-placeholder="Select categories for your app.." multiple name="groups" required>
+              <option>Twitch</option>
+              <option>Discord</option>
+              <option>Facebook</option>
+              <option>Bots</option>
+              <option>Tools</option>
+              <option>Viewers Interaction</option>
+            </select>
+            <input type="submit" value="Add Listing" />
+          </form>
+          <button name="close" className="btn btn-close" onClick={this.hideMdlList}>×</button>
         </Modal>
-        <Modal ref={this.mdlProfile} keyboard={true}>
+        <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
           <h2>User Profile</h2>
-          <button name="close" onClick={this.hideMdlProfile}>Close</button>
+          <button name="close" className="btn btn-close" onClick={this.hideMdlProfile}>×</button>
         </Modal>
       </div>
     );

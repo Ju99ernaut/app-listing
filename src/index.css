@@ -466,8 +466,9 @@ h2 {
 }
 
 input,
-textarea {
-    width: 100%;
+textarea,
+select {
+    width: 96%;
     padding: .5rem;
     font-size: 1rem;
     margin-bottom: 1rem;
@@ -477,13 +478,11 @@ textarea {
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 96%;
+input[type="submit"],
+select {
+    width: 100%;
+    cursor: pointer;
 }
-
-input[type="submit"] {}
 
 @keyframes wave {
     from {
