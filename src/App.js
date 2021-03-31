@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Grid from './components/Grid';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
+import Stars from './components/Stars';
 import fetch from './utils/fetch';
 
 class App extends React.Component {
@@ -179,10 +180,14 @@ class App extends React.Component {
         </Modal>
         <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
           <h2>User Profile</h2>
-          <div className="username">Username</div>
-          <div className="email">user@email.me</div>
-          <div className="listed-apps">Your app listings</div>
-          <div className="your-reviews">Your reviews</div>
+          <div className="meta__by">Username</div>
+          <div className="meta__by">user@email.me</div>
+          <div className="listed-apps">Random App</div>
+          <div className="your-reviews">
+            <span>12/11/21</span>
+            <div>Comment...</div>
+            <Stars rating={4.5} edit={false} />
+          </div>
           <button name="close" className="btn btn-close" onClick={this.hideMdlProfile}>×</button>
         </Modal>
       </div>
