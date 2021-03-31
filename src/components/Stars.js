@@ -1,9 +1,9 @@
 import ReactStarsRating from 'react-awesome-stars-rating';
 
-const Stars = ({ rating }) => {
+const Stars = ({ rating, edit }) => {
     const onChange = value => console.log('stars', value);
 
-    return <ReactStarsRating onChange={onChange} value={rating} size={20} primaryColor="#ececec" />
+    return <ReactStarsRating isEdit={edit} onChange={onChange} value={rating} size={20} primaryColor="#ececec" />
 };
 
 export default Stars;

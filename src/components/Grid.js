@@ -115,25 +115,24 @@ class Navbar extends React.Component {
                 </div>
                 <div ref={this.element} className="grid">
                     <div ref={this.sizer} className="grid__sizer"></div>
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={this.showMdlApp} img="logo512.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
                 </div>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
-                    <h2>App Data Expanded</h2>
+                    <h2>Random App</h2>
                     <div className="app-expanded">
                         <div className="app-image">
-                            <img src="" alt="app" />
+                            <img src="demo.png" alt="app" />
                         </div>
                         <div className="app-details">
-                            <h3>Title</h3>
                             <span>By Juggernaut </span>
                             <span> Update 12/11/21</span>
                             <div ref={this.buttons} className="filters">
@@ -141,12 +140,6 @@ class Navbar extends React.Component {
                                 <button name="discord" className="btn">Discord</button>
                             </div>
                             <p>A short description...</p>
-                            <div className="ratings">
-                                Ratings...
-                            </div>
-                            <div className="leave-rating">
-                                Leave Rating
-                            </div>
                         </div>
                     </div>
                     <button name="close" className="btn btn-close" onClick={this.hideMdlApp}>×</button>
