@@ -179,6 +179,10 @@ class App extends React.Component {
         </Modal>
         <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
           <h2>User Profile</h2>
+          <div className="username">Username</div>
+          <div className="email">user@email.me</div>
+          <div className="listed-apps">Your app listings</div>
+          <div className="your-reviews">Your reviews</div>
           <button name="close" className="btn btn-close" onClick={this.hideMdlProfile}>×</button>
         </Modal>
       </div>
