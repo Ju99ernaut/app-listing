@@ -131,7 +131,7 @@ class Navbar extends React.Component {
                                 </svg>
                             </button>
                         </div>
-                        <button name="profile" onClick={this.props.profileMd} className="btn">My Profile</button>
+                        <button name="profile" onClick={this.props.profileMd} className="btn" style={{ display: this.props.auth() ? '' : 'none' }}>My Profile</button>
                     </div>
                 </div>
                 <div ref={this.element} className="grid">
