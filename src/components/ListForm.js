@@ -1,12 +1,17 @@
 import { useRef } from 'react';
 import fetch from '../utils/fetch';
+import config from '../config';
 
-const ListForm = () => {
+const ListForm = ({ authorization }) => {
     const formList = useRef(null);
 
     const submitListing = e => {
         e.preventDefault();
-        fetch('/list', { method: 'POST', body: new FormData(formList.current) })
+        fetch(`${config.apiEndpoint}users/me/apps`, {
+            authorization,
+            method: 'POST',
+            body: new FormData(formList.current)
+        })
             .then(res => res.json())
             .then(res => console.log(res))
             .catch(err => console.log("Networt error"));
