@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import fetch from '../utils/fetch';
+import config from '../config';
 
 const RegisterForm = () => {
     const formRegister = useRef(null);
 
     const submitReg = e => {
         e.preventDefault();
-        fetch('/register', { method: 'POST', body: new FormData(formRegister.current) })
+        fetch(`${config.apiEndpoint}register`, { method: 'POST', body: new FormData(formRegister.current) })
             .then(res => res.json())
             .then(res => console.log(res))
             .catch(err => console.log("Networt error"));

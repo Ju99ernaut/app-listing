@@ -1,14 +1,18 @@
 import { useRef } from 'react';
 import fetch from '../utils/fetch';
+import config from '../config';
 
-const LoginForm = () => {
+const LoginForm = ({ login }) => {
     const formLogin = useRef(null);
 
     const submitLogin = e => {
         e.preventDefault();
-        fetch('/auth', { method: 'POST', body: new FormData(formLogin.current) })
+        fetch(`${config.apiEndpoint}auth`, { method: 'POST', body: new FormData(formLogin.current) })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                login(res);
+                console.log(res);
+            })
             .catch(err => console.log("Networt error"));
         formLogin.current.reset();
     }

@@ -7,6 +7,8 @@ import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import ListForm from './components/ListForm';
 import Profile from './components/Profile';
+import fetch from './utils/fetch';
+import config from './config';
 
 class App extends React.Component {
   constructor(props) {
@@ -64,9 +66,18 @@ class App extends React.Component {
     }
   }
 
-  login = () => { }
-
-  register = () => { }
+  login = ({ access_token, token_type }) => {
+    const authorization = `${token_type} ${access_token}`;
+    fetch(`${config.apiEndpoint}/users/me`, {
+      authorization
+    })
+      .then(res => res.json())
+      .then(res => {
+        this._login(authorization, res);
+        console.log(res);
+      })
+      .catch(err => console.log("Networt error"));
+  }
 
   _authenticate = (token, user) => {
     this.setState({
@@ -112,12 +123,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
-        <Grid profileMd={() => this.showMdl('profile')} />
+        <Navbar auth={this.authenticated} username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
+        <Grid auth={this.authenticated} profileMd={() => this.showMdl('profile')} />
         <Footer />
         <Modal ref={this.mdlLogin} className="modal" keyboard={true}>
           <h2>Login</h2>
-          <LoginForm />
+          <LoginForm login={this.login} />
           <button name="close" className="btn btn-close" onClick={() => this.hideMdl('login')}>×</button>
         </Modal>
         <Modal ref={this.mdlRegister} className="modal" keyboard={true}>
@@ -127,7 +138,7 @@ class App extends React.Component {
         </Modal>
         <Modal ref={this.mdlList} className="modal" keyboard={true}>
           <h2>List App</h2>
-          <ListForm />
+          <ListForm authorization={this.state.token} />
           <button name="close" className="btn btn-close" onClick={() => this.hideMdl('list')}>×</button>
         </Modal>
         <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
