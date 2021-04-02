@@ -3,8 +3,10 @@ import Navbar from './components/Navbar';
 import Grid from './components/Grid';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import Stars from './components/Stars';
-import fetch from './utils/fetch';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
+import ListForm from './components/ListForm';
+import Profile from './components/Profile';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,9 +15,6 @@ class App extends React.Component {
     this.mdlRegister = React.createRef();
     this.mdlList = React.createRef();
     this.mdlProfile = React.createRef();
-    this.formLogin = React.createRef();
-    this.formRegister = React.createRef();
-    this.formList = React.createRef();
     this.state = {
       token: null,
       username: null,
@@ -27,66 +26,42 @@ class App extends React.Component {
     this._autoLogin();
   }
 
-  showMdlLogin = () => {
-    this.mdlLogin.current.show();
+  showMdl = (mdl) => {
+    switch (mdl) {
+      case 'login':
+        this.mdlLogin.current.show();
+        break;
+      case 'register':
+        this.mdlRegister.current.show();
+        break;
+      case 'list':
+        this.mdlList.current.show();
+        break;
+      case 'profile':
+        this.mdlProfile.current.show();
+        break;
+      default:
+        break;
+    }
   }
 
-  hideMdlLogin = () => {
-    this.mdlLogin.current.hide();
-  }
-
-  showMdlReg = () => {
-    this.mdlRegister.current.show();
-  }
-
-  hideMdlReg = () => {
-    this.mdlRegister.current.hide();
-  }
-
-  showMdlList = () => {
-    this.mdlList.current.show();
-  }
-
-  hideMdlList = () => {
-    this.mdlList.current.hide();
-  }
-
-  showMdlProfile = () => {
-    this.mdlProfile.current.show();
-  }
-
-  hideMdlProfile = () => {
-    this.mdlProfile.current.hide();
-  }
-
-  submitLogin = e => {
-    e.preventDefault();
-    fetch('/auth', { method: 'POST', body: new FormData(this.formLogin.current) })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log("Networt error"));
-    this.formLogin.current.reset();
-    this.hideMdlLogin();
-  }
-
-  submitReg = e => {
-    e.preventDefault();
-    fetch('/register', { method: 'POST', body: new FormData(this.formRegister.current) })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log("Networt error"));
-    this.formRegister.current.reset();
-    this.hideMdlReg();
-  }
-
-  submitListing = e => {
-    e.preventDefault();
-    fetch('/listings', { method: 'POST', body: new FormData(this.formList.current) })
-      .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log("Networt error"));
-    this.formList.current.reset();
-    this.hideMdlReg();
+  hideMdl = (mdl) => {
+    switch (mdl) {
+      case 'login':
+        this.mdlLogin.current.hide();
+        break;
+      case 'register':
+        this.mdlRegister.current.hide();
+        break;
+      case 'list':
+        this.mdlList.current.hide();
+        break;
+      case 'profile':
+        this.mdlProfile.current.hide();
+        break;
+      default:
+        break;
+    }
   }
 
   login = () => { }
@@ -137,58 +112,28 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar username={this.state.username} loginMd={this.showMdlLogin} regMd={this.showMdlReg} listMd={this.showMdlList} profileMd={this.showMdlProfile} logout={this.logout} />
-        <Grid profileMd={this.showMdlProfile} />
+        <Navbar username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
+        <Grid profileMd={() => this.showMdl('profile')} />
         <Footer />
         <Modal ref={this.mdlLogin} className="modal" keyboard={true}>
           <h2>Login</h2>
-          <form ref={this.formLogin} onSubmit={this.submitLogin}>
-            <input type="text" id="username" name="username" placeholder="username" required />
-            <input type="password" id="password" name="password" placeholder="password" required />
-            <input type="submit" value="Login" />
-          </form>
-          <button name="close" className="btn btn-close" onClick={this.hideMdlLogin}>×</button>
+          <LoginForm />
+          <button name="close" className="btn btn-close" onClick={() => this.hideMdl('login')}>×</button>
         </Modal>
         <Modal ref={this.mdlRegister} className="modal" keyboard={true}>
           <h2>Register</h2>
-          <form ref={this.formRegister} onSubmit={this.submitReg}>
-            <input type="text" id="username2" name="username2" placeholder="username" required />
-            <input type="text" id="email" name="email" placeholder="email" />
-            <input type="password" id="password2" name="password2" placeholder="password" />
-            <input type="submit" value="Register" />
-          </form>
-          <button name="close" className="btn btn-close" onClick={this.hideMdlReg}>×</button>
+          <RegisterForm />
+          <button name="close" className="btn btn-close" onClick={() => this.hideMdl('register')}>×</button>
         </Modal>
         <Modal ref={this.mdlList} className="modal" keyboard={true}>
           <h2>List App</h2>
-          <form ref={this.formList} onSubmit={this.submitListing}>
-            <input type="text" id="title" name="title" placeholder="title" required />
-            <input type="text" id="image" name="image" placeholder="image url" required />
-            <textarea name="description" id="description" placeholder="description" required></textarea>
-            <input type="text" id="by" name="by" placeholder="by" required />
-            <select id="groups" data-placeholder="Select categories for your app.." multiple name="groups" required>
-              <option>Twitch</option>
-              <option>Discord</option>
-              <option>Facebook</option>
-              <option>Bots</option>
-              <option>Tools</option>
-              <option>Viewers Interaction</option>
-            </select>
-            <input type="submit" value="Add Listing" />
-          </form>
-          <button name="close" className="btn btn-close" onClick={this.hideMdlList}>×</button>
+          <ListForm />
+          <button name="close" className="btn btn-close" onClick={() => this.hideMdl('list')}>×</button>
         </Modal>
         <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
           <h2>User Profile</h2>
-          <div className="meta__by">Username</div>
-          <div className="meta__by">user@email.me</div>
-          <div className="listed-apps">Random App</div>
-          <div className="your-reviews">
-            <span>12/11/21</span>
-            <div>Comment...</div>
-            <Stars rating={4.5} edit={false} />
-          </div>
-          <button name="close" className="btn btn-close" onClick={this.hideMdlProfile}>×</button>
+          <Profile />
+          <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>
         </Modal>
       </div>
     );

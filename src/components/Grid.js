@@ -2,7 +2,8 @@ import React from 'react';
 import Loader from './Loader';
 import Item from './Item';
 import Modal from './Modal';
-import Stars from "./Stars";
+import Reviews from './Reviews';
+import AppDetail from './AppDetail';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
 import imagesLoaded from '../utils/imagesLoaded';
@@ -33,20 +34,30 @@ class Navbar extends React.Component {
         this.shuffle = null;
     }
 
-    showMdlApp = () => {
-        this.mdlApp.current.show();
+    showMdl = (mdl) => {
+        switch (mdl) {
+            case 'app':
+                this.mdlApp.current.show();
+                break;
+            case 'ratings':
+                this.mdlRatings.current.show();
+                break;
+            default:
+                break;
+        }
     }
 
-    hideMdlApp = () => {
-        this.mdlApp.current.hide();
-    }
-
-    showMdlRatings = () => {
-        this.mdlRatings.current.show();
-    }
-
-    hideMdlRatings = () => {
-        this.mdlRatings.current.hide();
+    hideMdl = (mdl) => {
+        switch (mdl) {
+            case 'app':
+                this.mdlApp.current.hide();
+                break;
+            case 'ratings':
+                this.mdlRatings.current.hide();
+                break;
+            default:
+                break;
+        }
     }
 
     _initShuffle = () => {
@@ -125,45 +136,26 @@ class Navbar extends React.Component {
                 </div>
                 <div ref={this.element} className="grid">
                     <div ref={this.sizer} className="grid__sizer"></div>
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={this.showMdlApp} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
+                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
                 </div>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
                     <h2>Random App</h2>
-                    <div className="app-expanded">
-                        <div className="app-image">
-                            <img src="demo.png" alt="app" />
-                        </div>
-                        <div className="app-details">
-                            <div className="meta__by">By Juggernaut</div>
-                            <div className="meta__by">Update 12/11/21</div>
-                            <div ref={this.buttons} style={{ paddingTop: '.5rem' }} className="filters">
-                                <button name="twitch" className="btn">Twitch</button>
-                                <button name="discord" className="btn">Discord</button>
-                            </div>
-                            <p>A short description...</p>
-                            <button name="reviews" onClick={this.showMdlRatings} className="btn">Reviews</button>
-                        </div>
-                    </div>
-                    <button name="close" className="btn btn-close" onClick={this.hideMdlApp}>×</button>
+                    <AppDetail reviews={() => this.showMdl('ratings')} />
+                    <button name="close" className="btn btn-close" onClick={() => this.hideMdl('app')}>×</button>
                 </Modal>
                 <Modal ref={this.mdlRatings} className="modal" keyboard={true}>
                     <h2>Ratings</h2>
-                    <div className="app-reviews">
-                        <span>user </span>
-                        <span>12/11/21</span>
-                        <div>Comment...</div>
-                        <Stars rating={4.5} edit={false} />
-                    </div>
-                    <button name="close" className="btn btn-close" onClick={this.hideMdlRatings}>×</button>
+                    <Reviews />
+                    <button name="close" className="btn btn-close" onClick={() => this.hideMdl('ratings')}>×</button>
                 </Modal>
             </div>
         );
