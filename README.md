@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# App Listing
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Template for app-listing webapp built to work with [app-listing-server](https://github.com/Ju99ernaut/app-listing-server). Built mainly as an app for listing rally, developer community projects.
+
+![screenshot](screenshot.png)
+
+## To Do
+- [ ] Connect to backend.
+- [ ] Fix mobile version.
+
+## Configuring
+
+Edit `config.js` and add you `apiEndpoint`, which is the endpoint for [app-listing-server](https://github.com/Ju99ernaut/app-listing-server).
 
 ## Available Scripts
 
