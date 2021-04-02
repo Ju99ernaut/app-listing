@@ -1,5 +1,7 @@
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
 const config = {
-    apiEndpoint: 'http://localhost:8000/',
+    apiEndpoint: API_ENDPOINT || 'http://localhost:8000/',
     coingeckoEndpoint: 'https://api.coingecko.com/api/v3/'
 }
 

@@ -1,0 +1,2 @@
+[template.enviroment]
+    API_ENDPOINT = "endpoint for backend API"

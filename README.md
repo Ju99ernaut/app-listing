@@ -4,6 +4,8 @@ Template for app-listing webapp built to work with [app-listing-server](https://
 
 ![screenshot](screenshot.png)
 
+[![Netlify Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Ju99ernaut/app-listing)
+
 ## To Do
 - [ ] Connect to backend.
 - [ ] Fix mobile version.
