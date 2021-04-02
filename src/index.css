@@ -42,7 +42,7 @@ code {
 }
 
 .header {
-    height: 5rem;
+    min-height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -530,6 +530,21 @@ select {
 }
 
 @media screen and (max-width: 50em) {
+    .logo {
+        display: none;
+    }
+
+    .price-ticker-container {
+        margin-left: 0;
+    }
+
+    .header {
+        flex-wrap: wrap;
+    }
+
+    .header .flex {
+        margin-top: .5rem;
+    }
 
     .grid__sizer,
     .grid__item,
@@ -539,6 +554,14 @@ select {
 }
 
 @media screen and (max-width: 25em) {
+    .btn.btn-login {
+        padding: .5rem;
+        padding-right: .75rem;
+        padding-left: .75rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+    }
+
     .grid {
         max-width: 75%;
     }
