@@ -1,5 +1,7 @@
 # App Listing
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/93ef659b-cb9c-408c-b5fa-266ad9ae5e1c/deploy-status)](https://app.netlify.com/sites/rally-community-app-listing/deploys)
+
 Template for app-listing webapp built to work with [app-listing-server](https://github.com/Ju99ernaut/app-listing-server). Built mainly as an app for listing rally, developer community projects.
 
 ![screenshot](screenshot.png)
