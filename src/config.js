@@ -1,5 +1,5 @@
 const config = {
-    apiEndpoint: '',
+    apiEndpoint: 'http://localhost:8000/',
     coingeckoEndpoint: 'https://api.coingecko.com/api/v3/'
 }
 
