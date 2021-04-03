@@ -10,7 +10,7 @@ Template for app-listing webapp built to work with [app-listing-server](https://
 
 ## To Do
 - [ ] Connect to backend.
-- [ ] Fix mobile version.
+- [x] Fix mobile version.
 
 ## Configuring
 
