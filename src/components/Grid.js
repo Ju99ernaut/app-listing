@@ -207,7 +207,7 @@ class Navbar extends React.Component {
                 </Modal>
                 <Modal ref={this.mdlRatings} className="modal dark" keyboard={true}>
                     <h2>Reviews</h2>
-                    <Reviews authorization={this.props.authorization} application={this.state.currentApp?.title} reviews={this.state.reviews} />
+                    <Reviews auth={this.props.auth} authorization={this.props.authorization} application={this.state.currentApp?.title} reviews={this.state.reviews} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('ratings')}>×</button>
                 </Modal>
             </div>

@@ -388,6 +388,7 @@ code {
 
 .app-image img {
     max-width: 500px;
+    width: 100%;
 }
 
 
@@ -608,7 +609,7 @@ select {
     }
 }
 
-@media screen and (max-width: 25em) {
+@media screen and (max-width: 28em) {
     .btn.btn-login {
         padding: .5rem;
         padding-right: .75rem;
