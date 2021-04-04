@@ -86,7 +86,7 @@ const DropModal = modalFactory({
     getModalStyle: (willHidden) => {
         return appendVendorPrefix({
             position: 'fixed',
-            width: '500px',
+            //width: '500px',
             transform: 'translate(-50%, -50%)',
             top: '50%',
             left: '50%',
