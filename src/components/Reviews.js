@@ -2,7 +2,7 @@ import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Stars';
 
-const Reviews = ({ reviews, application, authorization }) => {
+const Reviews = ({ reviews, application, auth, authorization }) => {
     let rating = 5;
     let comment = "";
     const onChangeStars = value => rating = value;
@@ -34,7 +34,7 @@ const Reviews = ({ reviews, application, authorization }) => {
     return (
         <div className="app-reviews">
             {ratingsList}
-            <div>
+            <div style={{ display: auth() ? '' : 'none' }}>
                 <p className="info">You can only add one rating per app, sending another one will overwrite the previous one</p>
                 <Stars onChange={onChangeStars} edit={true} />
                 <input onChange={onChangeComment} type="text" id="comment" name="comment" placeholder="comment" />
