@@ -629,6 +629,6 @@ select {
     .grid__sizer,
     .grid__item,
     .grid__item--size-a {
-        width: 98%;
+        width: 97%;
     }
 }
