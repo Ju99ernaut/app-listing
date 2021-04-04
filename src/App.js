@@ -21,6 +21,8 @@ class App extends React.Component {
       token: null,
       username: null,
       user: null,
+      userApps: [],
+      userRatings: [],
     };
   }
 
@@ -68,8 +70,8 @@ class App extends React.Component {
 
   login = ({ access_token, token_type }) => {
     const authorization = `${token_type} ${access_token}`;
-    fetch(`${config.apiEndpoint}/users/me`, {
-      authorization
+    fetch(`${config.apiEndpoint}users/me`, {
+      headers: new Headers({ authorization })
     })
       .then(res => res.json())
       .then(res => {
@@ -80,11 +82,15 @@ class App extends React.Component {
   }
 
   _authenticate = (token, user) => {
+    const myData = () => {
+      this._loadApps();
+      this._loadRatings();
+    };
     this.setState({
       token,
       user,
       username: user.username
-    });
+    }, myData);
   }
 
   _login = (token, user) => {
@@ -99,6 +105,46 @@ class App extends React.Component {
     if (!token) return;
     const user = JSON.parse(localStorage.getItem('user'));
     this._authenticate(token, user);
+  }
+
+  _loadApps = () => {
+    fetch(`${config.apiEndpoint}users/me/apps`, {
+      headers: new Headers({ authorization: this.state.token })
+    })
+      .then(res => {
+        if (!res.ok) {
+          this.logout();
+          throw new Error("Token expired");
+        }
+        return res.json()
+      })
+      .then(res => {
+        this.setState({
+          userApps: res
+        });
+        console.log(res);
+      })
+      .catch(err => console.log("Networt error"));
+  }
+
+  _loadRatings = () => {
+    fetch(`${config.apiEndpoint}users/me/ratings`, {
+      headers: new Headers({ authorization: this.state.token })
+    })
+      .then(res => {
+        if (!res.ok) {
+          this.logout();
+          throw new Error("Token expired");
+        }
+        return res.json()
+      })
+      .then(res => {
+        this.setState({
+          userRatings: res
+        });
+        console.log(res);
+      })
+      .catch(err => console.log("Networt error"));
   }
 
   logout = () => {
@@ -124,7 +170,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar auth={this.authenticated} username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
-        <Grid auth={this.authenticated} profileMd={() => this.showMdl('profile')} />
+        <Grid auth={this.authenticated} authorization={this.state.token} profileMd={() => this.showMdl('profile')} />
         <Footer />
         <Modal ref={this.mdlLogin} className="modal" keyboard={true}>
           <h2>Login</h2>
@@ -133,7 +179,7 @@ class App extends React.Component {
         </Modal>
         <Modal ref={this.mdlRegister} className="modal" keyboard={true}>
           <h2>Register</h2>
-          <RegisterForm />
+          <RegisterForm login={this.login} />
           <button name="close" className="btn btn-close" onClick={() => this.hideMdl('register')}>×</button>
         </Modal>
         <Modal ref={this.mdlList} className="modal" keyboard={true}>
@@ -143,7 +189,7 @@ class App extends React.Component {
         </Modal>
         <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
           <h2>User Profile</h2>
-          <Profile />
+          <Profile user={this.state.user} apps={this.state.userApps} ratings={this.state.userRatings} />
           <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>
         </Modal>
       </div>

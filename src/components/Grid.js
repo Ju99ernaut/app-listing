@@ -7,6 +7,8 @@ import AppDetail from './AppDetail';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
 import imagesLoaded from '../utils/imagesLoaded';
+import fetch from '../utils/fetch';
+import config from '../config';
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -18,11 +20,19 @@ class Navbar extends React.Component {
         this.sizer = React.createRef();
         this.mdlApp = React.createRef();
         this.mdlRatings = React.createRef();
+        this.state = {
+            currentApp: null,
+            applications: [],
+            ratings: [],
+            reviews: [],
+        };
     }
 
     componentDidMount() {
         imagesLoaded(this.element.current, this._initShuffle);
         this.addSearchEvent();
+        this.loadApps();
+        this.loadRatings();
     }
 
     componentDidUpdate() {
@@ -34,12 +44,64 @@ class Navbar extends React.Component {
         this.shuffle = null;
     }
 
-    showMdl = (mdl) => {
+    loadApps = () => {
+        fetch(`${config.apiEndpoint}apps`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    applications: res
+                });
+                console.log(res);
+            })
+            .catch(err => console.log("Networt error"));
+    }
+
+    loadRatings = () => {
+        fetch(`${config.apiEndpoint}ratings/averages`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    ratings: res
+                });
+                console.log(res);
+            })
+            .catch(err => console.log("Networt error"));
+    }
+
+    loadReviews = (application) => {
+        fetch(`${config.apiEndpoint}ratings/app/${application}`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    reviews: res
+                });
+                console.log(res);
+            })
+            .catch(err => console.log("Networt error"));
+    }
+
+    buildItemsList = () => {
+        const apps = this.state.applications;
+        const ratings = this.state.ratings;
+
+        return apps.map((item, i) => {
+            const { groups } = item;
+            const rating = ratings.find(rating => rating.application === item.title);
+            const groupsStr = groups.split(',').map(group => `"${group.toLowerCase().trim()}"`).join(',');
+            return <Item appMd={e => this.showMdl(e, 'app')} app={{ key: i, ...item }} rating={rating?.rating} groups={`[${groupsStr}]`} />;
+        });
+    }
+
+    showMdl = (e, mdl) => {
         switch (mdl) {
             case 'app':
+                this.setState(state => ({
+                    currentApp: state.applications[e.target.dataset.id]
+                }));
                 this.mdlApp.current.show();
                 break;
             case 'ratings':
+                this.loadReviews(this.state.currentApp.title);
                 this.mdlRatings.current.show();
                 break;
             default:
@@ -65,7 +127,7 @@ class Navbar extends React.Component {
             itemSelector: '.grid__item',
             sizer: this.sizer.current,
             speed: 600,
-            columnThreshold: .04,
+            columnThreshold: .05,
             buffer: 1
         });
         shuffle.layout();
@@ -136,25 +198,16 @@ class Navbar extends React.Component {
                 </div>
                 <div ref={this.element} className="grid">
                     <div ref={this.sizer} className="grid__sizer"></div>
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["facebook"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["bots", "tools"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["tools"]'} title="Random App" by="Ju99ernaut" rating={4.5} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["bots", "interactions"]'} title="Random App" by="Ju99ernaut" rating={4} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["interactions"]'} title="Random App" by="Ju99ernaut" rating={5} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["discord"]'} title="Random App" by="Ju99ernaut" rating={2} />
-                    <Item appMd={() => this.showMdl('app')} img="demo.png" groups={'["twitch"]'} title="Random App" by="Ju99ernaut" rating={3.5} />
+                    {this.buildItemsList()}
                 </div>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
-                    <h2>Random App</h2>
-                    <AppDetail reviews={() => this.showMdl('ratings')} />
+                    <h2>{this.state.currentApp?.title}</h2>
+                    <AppDetail app={this.state.currentApp} reviews={e => this.showMdl(e, 'ratings')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('app')}>×</button>
                 </Modal>
-                <Modal ref={this.mdlRatings} className="modal" keyboard={true}>
-                    <h2>Ratings</h2>
-                    <Reviews />
+                <Modal ref={this.mdlRatings} className="modal dark" keyboard={true}>
+                    <h2>Reviews</h2>
+                    <Reviews authorization={this.props.authorization} application={this.state.currentApp?.title} reviews={this.state.reviews} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('ratings')}>×</button>
                 </Modal>
             </div>
