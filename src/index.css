@@ -390,6 +390,38 @@ code {
     max-width: 500px;
 }
 
+
+/* TABLES */
+table,
+th,
+td {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+}
+
+table {
+    margin-top: 1rem;
+    border-spacing: 5px;
+    background-color: transparent;
+}
+
+th,
+td {
+    padding: .5rem;
+}
+
+th {
+    text-align: left;
+}
+
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+table th {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 /* FOOTER */
 .footer {
     display: flex;
@@ -458,10 +490,29 @@ code {
 /* MODAL */
 .modal {
     width: 500px;
+    max-height: 90%;
+    overflow-y: auto;
     background-color: var(--secondary-color);
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
     border-radius: 1rem;
     padding: 1rem;
+}
+
+.modal.dark {
+    background-color: var(--primary-background);
+}
+
+.review {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: .5rem;
+}
+
+.info {
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid rgb(212, 111, 111);
 }
 
 .btn-close {
