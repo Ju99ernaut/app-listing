@@ -1,17 +1,20 @@
-const AppDetail = ({ reviews }) => {
+const AppDetail = ({ reviews, app }) => {
+    const { image, by, updated, groups, description } = app;
+    const filterList = groups.split(',').map(filter => <button name={filter.toLowerCase().trim()} className="btn">{filter.trim()}</button>);
+    const date = new Date(updated);
+
     return (
         <div className="app-expanded">
             <div className="app-image">
-                <img src="demo.png" alt="app" />
+                <img src={image} alt="app" />
             </div>
             <div className="app-details">
-                <div className="meta__by">By Juggernaut</div>
-                <div className="meta__by">Update 12/11/21</div>
+                <div className="meta__by">By {by}</div>
+                <div className="meta__by">Update: {date.toGMTString()}</div>
                 <div style={{ paddingTop: '.5rem' }} className="filters">
-                    <button name="twitch" className="btn">Twitch</button>
-                    <button name="discord" className="btn">Discord</button>
+                    {filterList}
                 </div>
-                <p>A short description...</p>
+                <p>{description}</p>
                 <button name="reviews" onClick={reviews} className="btn">Reviews</button>
             </div>
         </div>
