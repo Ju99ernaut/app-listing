@@ -2,7 +2,7 @@ import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Stars';
 
-const Reviews = ({ reviews, application, auth, authorization }) => {
+const Reviews = ({ reviews, application, auth, authorization, reload }) => {
     let rating = 5;
     let comment = "";
     const onChangeStars = value => rating = value;
@@ -14,7 +14,10 @@ const Reviews = ({ reviews, application, auth, authorization }) => {
             body: JSON.stringify({ rating, comment })
         })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                reload();
+                console.log(res);
+            })
             .catch(err => console.log("Networt error"));
     };
 

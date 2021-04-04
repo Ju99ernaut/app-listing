@@ -2,7 +2,6 @@ import React from 'react';
 import Loader from './Loader';
 import Item from './Item';
 import Modal from './Modal';
-import Reviews from './Reviews';
 import AppDetail from './AppDetail';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
@@ -19,7 +18,6 @@ class Navbar extends React.Component {
         this.element = React.createRef();
         this.sizer = React.createRef();
         this.mdlApp = React.createRef();
-        this.mdlRatings = React.createRef();
         this.state = {
             currentApp: null,
             applications: [],
@@ -42,6 +40,10 @@ class Navbar extends React.Component {
     componentWillUnmount() {
         this.shuffle.destroy();
         this.shuffle = null;
+    }
+
+    reload = () => {
+        this.loadReviews(this.state.currentApp.title);
     }
 
     loadApps = () => {
@@ -88,38 +90,20 @@ class Navbar extends React.Component {
             const { groups } = item;
             const rating = ratings.find(rating => rating.application === item.title);
             const groupsStr = groups.split(',').map(group => `"${group.toLowerCase().trim()}"`).join(',');
-            return <Item appMd={e => this.showMdl(e, 'app')} app={{ key: i, ...item }} rating={rating?.rating} groups={`[${groupsStr}]`} />;
+            return <Item appMd={this.showMdl} app={{ key: i, ...item }} rating={rating?.rating} groups={`[${groupsStr}]`} />;
         });
     }
 
-    showMdl = (e, mdl) => {
-        switch (mdl) {
-            case 'app':
-                this.setState(state => ({
-                    currentApp: state.applications[e.target.dataset.id]
-                }));
-                this.mdlApp.current.show();
-                break;
-            case 'ratings':
-                this.loadReviews(this.state.currentApp.title);
-                this.mdlRatings.current.show();
-                break;
-            default:
-                break;
-        }
+    showMdl = (e) => {
+        const clb = () => this.loadReviews(this.state.currentApp.title);
+        this.setState(state => ({
+            currentApp: state.applications[e.target.dataset.id]
+        }), clb);
+        this.mdlApp.current.show();
     }
 
-    hideMdl = (mdl) => {
-        switch (mdl) {
-            case 'app':
-                this.mdlApp.current.hide();
-                break;
-            case 'ratings':
-                this.mdlRatings.current.hide();
-                break;
-            default:
-                break;
-        }
+    hideMdl = () => {
+        this.mdlApp.current.hide();
     }
 
     _initShuffle = () => {
@@ -202,13 +186,8 @@ class Navbar extends React.Component {
                 </div>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
                     <h2>{this.state.currentApp?.title}</h2>
-                    <AppDetail app={this.state.currentApp} reviews={e => this.showMdl(e, 'ratings')} />
-                    <button name="close" className="btn btn-close" onClick={() => this.hideMdl('app')}>×</button>
-                </Modal>
-                <Modal ref={this.mdlRatings} className="modal dark" keyboard={true}>
-                    <h2>Reviews</h2>
-                    <Reviews auth={this.props.auth} authorization={this.props.authorization} application={this.state.currentApp?.title} reviews={this.state.reviews} />
-                    <button name="close" className="btn btn-close" onClick={() => this.hideMdl('ratings')}>×</button>
+                    <AppDetail app={this.state.currentApp} auth={this.props.auth} authorization={this.props.authorization} reviews={this.state.reviews} reload={this.reload} />
+                    <button name="close" className="btn btn-close" onClick={this.hideMdl}>×</button>
                 </Modal>
             </div>
         );

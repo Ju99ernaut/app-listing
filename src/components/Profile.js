@@ -70,7 +70,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 </tr>
                 {ratingsList}
             </table>
-            <p className="info">Actions are not yet implemented but you can modify data using the API at {config.apiEndpoint}</p>
+            <p className="info">Actions are not yet implemented but you can modify data using the API at {config.apiEndpoint}docs</p>
         </div>
     );
 };

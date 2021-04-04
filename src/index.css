@@ -138,6 +138,16 @@ code {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
+.btn.btn-tab {
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: .5rem 0;
+}
+
+.btn.btn-tab.btn-active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid var(--primary-background);
+}
+
 /* NAVBAR */
 .navbar-container {
     display: flex;
@@ -501,6 +511,11 @@ table th {
 
 .modal.dark {
     background-color: var(--primary-background);
+}
+
+.app-reviews {
+    max-height: 250px;
+    overflow-y: auto;
 }
 
 .review {

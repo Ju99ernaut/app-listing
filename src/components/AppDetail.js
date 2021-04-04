@@ -1,21 +1,50 @@
-const AppDetail = ({ reviews, app }) => {
+import { useRef } from 'react';
+import Reviews from './Reviews';
+
+const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
+    const details = useRef(null);
+    const revs = useRef(null);
+    const buttons = useRef(null);
     const { image, by, updated, groups, description } = app;
     const filterList = groups.split(',').map(filter => <button name={filter.toLowerCase().trim()} className="btn">{filter.trim()}</button>);
     const date = new Date(updated);
+
+    const switchTab = (e, tab) => {
+        if (tab === 'reviews') {
+            details.current.style.display = 'none';
+            revs.current.style.display = '';
+        } else {
+            details.current.style.display = '';
+            revs.current.style.display = 'none';
+        }
+        _activateButton(e);
+    }
+
+    const _activateButton = e => {
+        const btns = buttons.current.querySelectorAll('button');
+        btns.forEach(btn => btn.classList.remove('btn-active'));
+        e.currentTarget.classList.add('btn-active');
+    }
 
     return (
         <div className="app-expanded">
             <div className="app-image">
                 <img src={image} alt="app" />
             </div>
-            <div className="app-details">
+            <div ref={buttons} className="filters">
+                <button onClick={switchTab} name="details" className="btn btn-tab btn-active">Details</button>
+                <button onClick={e => switchTab(e, 'reviews')} name="reviews" className="btn btn-tab">Reviews</button>
+            </div>
+            <div ref={details} className="app-details">
                 <div className="meta__by">By {by}</div>
                 <div className="meta__by">Update: {date.toGMTString()}</div>
                 <div style={{ paddingTop: '.5rem' }} className="filters">
                     {filterList}
                 </div>
                 <p>{description}</p>
-                <button name="reviews" onClick={reviews} className="btn">Reviews</button>
+            </div>
+            <div style={{ display: 'none' }} ref={revs}>
+                <Reviews auth={auth} authorization={authorization} application={app.title} reviews={reviews} reload={reload} />
             </div>
         </div>
     );
