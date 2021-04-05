@@ -120,10 +120,15 @@ code {
     margin-right: .5rem;
     margin-top: .5rem;
     padding: .5rem;
-    border-radius: .125rem;
+    border-radius: .25rem;
     cursor: pointer;
     color: var(--primary-color);
     background-color: var(--secondary-background);
+    transition: .3s;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .btn.btn-login {
@@ -135,8 +140,12 @@ code {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+.btn.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 .btn.btn-active {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: #f40;
 }
 
 .btn.btn-tab {
@@ -146,7 +155,7 @@ code {
 
 .btn.btn-tab.btn-active {
     background-color: rgba(255, 255, 255, 0.2);
-    border-bottom: 2px solid var(--primary-background);
+    border-bottom: 2px solid #f40;
 }
 
 /* NAVBAR */
@@ -402,6 +411,11 @@ code {
     width: 100%;
 }
 
+.app-reviews,
+.app-details {
+    animation: fadein 1s ease;
+}
+
 
 /* TABLES */
 table,
@@ -503,7 +517,7 @@ table th {
 /* MODAL */
 .modal {
     width: 500px;
-    max-height: 90%;
+    max-height: 99%;
     overflow-y: auto;
     background-color: var(--secondary-color);
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -561,10 +575,14 @@ select {
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-input[type="submit"],
-select {
+input[type="submit"] {
     width: 100%;
     cursor: pointer;
+    background-color: #f40;
+}
+
+input[type="submit"]:hover {
+    background-color: #f34e12;
 }
 
 @keyframes wave {
@@ -584,6 +602,16 @@ select {
 
     to {
         transform: scale(1);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 

@@ -50,6 +50,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 <input type="submit" value="Update" />
             </form>
             <div className="meta__by">Joined: {new Date(user.joined).toGMTString()}</div>
+            <p className="meta__by">Your Applications:</p>
             <table>
                 <tr>
                     <th>ID</th>
@@ -60,6 +61,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 </tr>
                 {appList}
             </table>
+            <p className="meta__by">Your Comments:</p>
             <table>
                 <tr>
                     <th>ID</th>
