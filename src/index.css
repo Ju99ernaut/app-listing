@@ -118,6 +118,7 @@ code {
     border: 1px solid rgba(0, 0, 0, 0.1);
     outline: none;
     margin-right: .5rem;
+    margin-top: .5rem;
     padding: .5rem;
     border-radius: .125rem;
     cursor: pointer;
@@ -625,6 +626,11 @@ select {
 }
 
 @media screen and (max-width: 28em) {
+    .footer {
+        padding-right: .5rem;
+        padding-left: .5rem;
+    }
+
     .btn.btn-login {
         padding: .5rem;
         padding-right: .75rem;

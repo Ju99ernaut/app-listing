@@ -3,7 +3,7 @@ const Footer = () => {
         <div className="footer">
             <p className="copyright">© Copyright 2021</p>
             <div className="flex">
-                <a href="./">Made with ❤️ by the community</a>
+                <a href="./">Made with ❤️ by the rally community</a>
             </div>
         </div>
     );
