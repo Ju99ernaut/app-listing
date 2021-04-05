@@ -449,6 +449,7 @@ table th {
 
 .footer a {
     text-decoration: none;
+    margin-left: .75rem;
     color: var(--primary-color);
 }
 
@@ -627,8 +628,7 @@ select {
 
 @media screen and (max-width: 28em) {
     .footer {
-        padding-right: .5rem;
-        padding-left: .5rem;
+        flex-direction: column;
     }
 
     .btn.btn-login {
