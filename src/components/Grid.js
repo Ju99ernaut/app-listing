@@ -53,6 +53,7 @@ class Navbar extends React.Component {
                 this.setState({
                     applications: res
                 });
+                this.loader.current.style.display = 'none';
                 console.log(res);
             })
             .catch(err => console.log("Networt error"));
@@ -121,7 +122,6 @@ class Navbar extends React.Component {
         }, 50));
 
         this.shuffle = shuffle;
-        this.loader.current.style.display = 'none';
     }
 
     filter = (e, filter) => {
@@ -155,9 +155,6 @@ class Navbar extends React.Component {
     render() {
         return (
             <div className="grid-container">
-                <div ref={this.loader} className="loader">
-                    <Loader />
-                </div>
                 <div className="header">
                     <div ref={this.buttons} className="filters">
                         <button name="all" onClick={e => this.filter(e)} className="btn btn-active">All</button>
@@ -181,6 +178,9 @@ class Navbar extends React.Component {
                     </div>
                 </div>
                 <div ref={this.element} className="grid">
+                    <div ref={this.loader} className="loader">
+                        <Loader />
+                    </div>
                     <div ref={this.sizer} className="grid__sizer"></div>
                     {this.buildItemsList()}
                 </div>
