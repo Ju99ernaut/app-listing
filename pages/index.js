@@ -1,16 +1,16 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Grid from './components/Grid';
-import Footer from './components/Footer';
-import Modal from './components/Modal';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import ListForm from './components/ListForm';
-import Profile from './components/Profile';
-import fetch from './utils/fetch';
-import config from './config';
+import Navbar from '../components/Navbar';
+import Grid from '../components/Grid';
+import Footer from '../components/Footer';
+import Modal from '../components/Modal';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
+import ListForm from '../components/ListForm';
+import Profile from '../components/Profile';
+import fetch from '../utils/fetch';
+import config from '../config';
 
-class App extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.mdlLogin = React.createRef();
@@ -197,4 +197,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Home;

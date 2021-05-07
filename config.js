@@ -1,4 +1,4 @@
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
 const config = {
     apiEndpoint: API_ENDPOINT || 'http://localhost:8000/',
