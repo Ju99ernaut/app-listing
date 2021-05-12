@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import '../styles/globals.css'
-import 'font-awesome/css/font-awesome.min.css'
 
 export default function MyApp({ Component, pageProps }) {
   return (

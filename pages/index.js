@@ -108,7 +108,7 @@ class Home extends React.Component {
   }
 
   _loadApps = () => {
-    fetch(`${config.apiEndpoint}users/me/apps`, {
+    fetch(`${config.apiEndpoint}apps/me`, {
       headers: new Headers({ authorization: this.state.token })
     })
       .then(res => {
@@ -128,7 +128,7 @@ class Home extends React.Component {
   }
 
   _loadRatings = () => {
-    fetch(`${config.apiEndpoint}users/me/ratings`, {
+    fetch(`${config.apiEndpoint}ratings/me`, {
       headers: new Headers({ authorization: this.state.token })
     })
       .then(res => {

@@ -89,14 +89,14 @@ class Navbar extends React.Component {
 
         return apps.map((item, i) => {
             const { groups } = item;
-            const rating = ratings.find(rating => rating.application === item.title);
-            const groupsStr = groups.split(',').map(group => `"${group.toLowerCase().trim()}"`).join(',');
-            return <Item appMd={this.showMdl} app={{ key: i, ...item }} rating={rating?.rating} groups={`[${groupsStr}]`} />;
+            const rating = ratings.find(rating => rating.application.id === item.id);
+            const groupsStr = groups.map(group => `"${group.toLowerCase().trim()}"`).join(',');
+            return <Item key={i} appMd={this.showMdl} app={{ key: i, ...item }} rating={rating?.rating} groups={`[${groupsStr}]`} />;
         });
     }
 
     showMdl = (e) => {
-        const clb = () => this.loadReviews(this.state.currentApp.title);
+        const clb = () => this.loadReviews(this.state.currentApp.id);
         this.setState(state => ({
             currentApp: state.applications[e.target.dataset.id]
         }), clb);
