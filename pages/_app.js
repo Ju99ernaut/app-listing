@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Layout from '../layouts/Layout'
 import '../styles/globals.css'
 
 export default function MyApp({ Component, pageProps }) {
@@ -22,7 +23,9 @@ export default function MyApp({ Component, pageProps }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }

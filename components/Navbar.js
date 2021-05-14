@@ -73,10 +73,10 @@ class Navbar extends React.Component {
                 <div className="navbar">
                     <div className="logo-container">
                         <div className="logo">
-                            <a href="./"><img src="rallyIcon.svg" alt="logo" /></a>
+                            <a href="/"><img src="/rallyIcon.svg" alt="logo" /></a>
                             <div>Marketplace</div>
                         </div>
-                        <PriceTicker icon="RLY.svg" coin="$RLY" price={this.state.price} increase={this.state.increase} change={this.state.change} />
+                        <PriceTicker icon="/RLY.svg" coin="$RLY" price={this.state.price} increase={this.state.increase} change={this.state.change} />
                     </div>
                     <div className="profile-container">
                         <button name="login" onClick={this.props.loginMd} style={{ display: !this.props.auth() ? '' : 'none' }} className="btn btn-login">Login</button>
