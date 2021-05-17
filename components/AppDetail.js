@@ -41,6 +41,7 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
                 <div style={{ paddingTop: '.5rem' }} className="filters">
                     {filterList}
                 </div>
+                <button name={app.status.trim() || 'not available'} className="btn btn-status">{app.status.trim() || 'not available'}</button>
                 <p>{description}</p>
             </div>
             <div style={{ display: 'none' }} ref={revs}>
