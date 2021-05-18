@@ -35,6 +35,10 @@
     color: #f40;
 }
 
+.mt {
+    margin-top: .75rem;
+}
+
 .sr {
     display: none;
 }
