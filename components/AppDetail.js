@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import Reviews from './Reviews';
+import Link from 'next/link';
 
 const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
     const details = useRef(null);
@@ -41,8 +42,13 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
                 <div style={{ paddingTop: '.5rem' }} className="filters">
                     {filterList}
                 </div>
-                <button name={app.status.trim() || 'not available'} className="btn btn-status">{app.status.trim() || 'not available'}</button>
+                <div className="meta__by">Status:
+                    <button name={app.status.trim() || 'not available'} className="btn btn-status">{app.status.trim() || 'not available'}</button>
+                </div>
                 <p>{description}</p>
+                <Link href={`/details/${app.id}`}>
+                    <button name="more-details" className="btn">More Details</button>
+                </Link>
             </div>
             <div style={{ display: 'none' }} ref={revs}>
                 <Reviews auth={auth} authorization={authorization} application={app.title} reviews={reviews} reload={reload} />
