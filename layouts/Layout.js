@@ -164,11 +164,11 @@ class Layout extends Component {
         return this.state.user
     }
     render() {
-        const { token } = this.state;
+        const { user, token } = this.state;
         const { authenticated, showMdl } = this;
 
         return (
-            <LayoutProvider value={{ token, authenticated, showMdl }}>
+            <LayoutProvider value={{ user, token, authenticated, showMdl }}>
                 <Navbar auth={this.authenticated} username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
                 {this.props.children}
                 <Footer />
