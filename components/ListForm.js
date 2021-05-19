@@ -7,7 +7,7 @@ const ListForm = ({ authorization }) => {
 
     const submitListing = e => {
         e.preventDefault();
-        fetch(`${config.apiEndpoint}users/me/apps`, {
+        fetch(`${config.apiEndpoint}apps`, {
             headers: new Headers({ authorization }),
             method: 'POST',
             body: new FormData(formList.current)

@@ -20,21 +20,21 @@ const Profile = ({ user, apps, ratings, authorization }) => {
 
     const appList = apps.map(app => {
         return (
-            <tr>
+            <tr key={app.id}>
                 <td>{app.id}</td>
                 <td>{app.title}</td>
                 <td>{app.updated}</td>
                 <td>{app.by}</td>
-                <td>{app.groups}</td>
+                <td>{app.groups.join(' ')}</td>
             </tr>
         )
     });
 
     const ratingsList = ratings.map(rating => {
         return (
-            <tr>
+            <tr key={ratings.id}>
                 <td>{rating.id}</td>
-                <td>{rating.application}</td>
+                <td>{rating.application.title}</td>
                 <td>{rating.updated}</td>
                 <td>{rating.comment}</td>
                 <td><Stars rating={rating.rating} edit={false} /></td>
@@ -45,14 +45,14 @@ const Profile = ({ user, apps, ratings, authorization }) => {
     return (
         <div>
             <form ref={formUser} onSubmit={submitUpdate}>
-                <input type="text" id="username3" name="username3" value={user.username} placeholder="username" required />
-                <input type="text" id="email2" name="email2" value={user.email} placeholder="email" />
+                <input type="text" id="username3" name="username3" value={user.username} onChange={() => { }} placeholder="username" required />
+                <input type="text" id="email2" name="email2" value={user.email} onChange={() => { }} placeholder="email" />
                 <input type="submit" value="Update" />
             </form>
             <div className="meta__by">Joined: {new Date(user.joined).toGMTString()}</div>
             <p className="meta__by">Your Applications:</p>
             <table>
-                <tr>
+                <tr key={0}>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Updated</th>
@@ -63,7 +63,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
             </table>
             <p className="meta__by">Your Comments:</p>
             <table>
-                <tr>
+                <tr key={0}>
                     <th>ID</th>
                     <th>Application</th>
                     <th>Updated</th>

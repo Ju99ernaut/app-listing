@@ -1,6 +1,7 @@
 import React from 'react';
 import PriceTicker from './PriceTicker';
 import Dropdown from './Dropdown';
+import Link from 'next/link';
 import fetch from '../utils/fetch';
 import querystring from 'querystring';
 import config from '../config';
@@ -73,10 +74,10 @@ class Navbar extends React.Component {
                 <div className="navbar">
                     <div className="logo-container">
                         <div className="logo">
-                            <a href="./"><img src="rallyIcon.svg" alt="logo" /></a>
+                            <Link href="/"><a><img src="/rallyIcon.svg" alt="logo" /></a></Link>
                             <div>Marketplace</div>
                         </div>
-                        <PriceTicker icon="RLY.svg" coin="$RLY" price={this.state.price} increase={this.state.increase} change={this.state.change} />
+                        <PriceTicker icon="/RLY.svg" coin="$RLY" price={this.state.price} increase={this.state.increase} change={this.state.change} />
                     </div>
                     <div className="profile-container">
                         <button name="login" onClick={this.props.loginMd} style={{ display: !this.props.auth() ? '' : 'none' }} className="btn btn-login">Login</button>

@@ -1,0 +1,45 @@
+.details {
+    padding: 1.5em;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    min-height: 75vh;
+}
+
+.header {
+    font-size: 1.5rem;
+}
+
+.markdown {
+    background-color: cornsilk;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    min-width: 75%;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.metadata {
+    height: 100%;
+    width: 22%;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+.link {
+    display: flex;
+    margin-top: .75rem;
+    text-decoration: none;
+    color: #f40;
+}
+
+.mt {
+    margin-top: .75rem;
+}
+
+.sr {
+    display: none;
+}

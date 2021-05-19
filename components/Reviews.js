@@ -8,7 +8,7 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
     const onChangeStars = value => rating = value;
     const onChangeComment = value => comment = value;
     const onClick = () => {
-        fetch(`${config.apiEndpoint}users/me/ratings/${application}`, {
+        fetch(`${config.apiEndpoint}ratings/${application}`, {
             headers: new Headers({ authorization }),
             method: 'POST',
             body: JSON.stringify({ rating, comment })
@@ -25,8 +25,8 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
         const date = new Date(review.updated);
 
         return (
-            <div className="review">
-                <span className="meta__by">{review.user}:</span>
+            <div key={review.id} className="review">
+                <span className="meta__by">{review.user.username}:</span>
                 <span className="meta__by">{date.toGMTString()}</span>
                 <div>{review.comment}</div>
                 <Stars rating={review.rating} edit={false} />
