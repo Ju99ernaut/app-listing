@@ -24,9 +24,10 @@ class Layout extends Component {
             userRatings: [],
         };
     }
-    componentDidMount() {
-        this._autoLogin();
-    }
+
+    //componentDidMount() {
+    //    this._autoLogin();
+    //}
 
     showMdl = (mdl) => {
         switch (mdl) {
@@ -92,18 +93,18 @@ class Layout extends Component {
     }
 
     _login = (token, user) => {
-        localStorage.setItem('token', token);
-        localStorage.setItem('username', user.username);
-        localStorage.setItem('user', JSON.stringify(user));
+        //localStorage.setItem('token', token);
+        //localStorage.setItem('username', user.username);
+        //localStorage.setItem('user', JSON.stringify(user));
         this._authenticate(token, user);
     }
 
-    _autoLogin = () => {
-        const token = localStorage.getItem('token');
-        if (!token) return;
-        const user = JSON.parse(localStorage.getItem('user'));
-        this._authenticate(token, user);
-    }
+    //_autoLogin = () => {
+    //    const token = localStorage.getItem('token');
+    //    if (!token) return;
+    //    const user = JSON.parse(localStorage.getItem('user'));
+    //    this._authenticate(token, user);
+    //}
 
     _loadApps = () => {
         fetch(`${config.apiEndpoint}apps/me`, {
@@ -151,9 +152,9 @@ class Layout extends Component {
             username: null,
             user: null
         });
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        localStorage.removeItem('user');
+        //localStorage.removeItem('token');
+        //localStorage.removeItem('username');
+        //localStorage.removeItem('user');
     }
 
     authenticated = () => {
@@ -163,6 +164,7 @@ class Layout extends Component {
     getUser = () => {
         return this.state.user
     }
+
     render() {
         const { user, token } = this.state;
         const { authenticated, showMdl } = this;

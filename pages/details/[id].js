@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import config from '../../config';
 import s from '../../styles/Details.module.css';
 import { useContext, useEffect, useState } from 'react';
+import ErrorPage from 'next/error';
 import LayoutContext from '../../contexts/LayoutContext';
 import browserFetch from '../../utils/fetch';
 
@@ -10,7 +11,7 @@ export const getServerSideProps = async ({ params }) => {
     const data = await res.json();
 
     return {
-        props: { data }
+        props: { data: { appId: params.id, ...data } }
     }
 }
 
@@ -25,19 +26,23 @@ const DynamicEditorNoSSR = dynamic(
 )
 
 const Detail = ({ data }) => {
-    const { application, updated, documentation, external } = data;
-    const filterList = application.groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-active">{filter.trim()}</button>);
+    const { appId, updated, documentation, external } = data;
     const date = new Date(updated);
     const ctx = useContext(LayoutContext);
     const [currentApp, setCurrentApp] = useState(null);
-    const [url, setUrl] = useState(external);
-    const [markdown, setMarkdown] = useState(documentation);
+    const [errorPage, setErrorPage] = useState(false);
+    const [url, setUrl] = useState(external || "");
+    const [markdown, setMarkdown] = useState(documentation || "Hello world");
 
     useEffect(() => {
-        browserFetch(`${config.apiEndpoint}apps/${application.id}`)
+        browserFetch(`${config.apiEndpoint}apps/${appId}`)
             .then(res => res.json())
             .then(res => {
-                setCurrentApp(res);
+                if (res.detail) setErrorPage(true);
+                else {
+                    setErrorPage(false);
+                    setCurrentApp(res);
+                }
                 console.log(res);
             })
             .catch(err => console.log("Networt error"));
@@ -49,7 +54,7 @@ const Detail = ({ data }) => {
     }
 
     const updateDocs = () => {
-        browserFetch(`${config.apiEndpoint}documentation/${application.id}`,
+        browserFetch(`${config.apiEndpoint}documentation/${appId}`,
             {
                 headers: new Headers({ authorization: ctx.token }),
                 method: 'POST',
@@ -77,20 +82,21 @@ const Detail = ({ data }) => {
     //         {application.status.trim() || 'not available'}
     //     </button>
     // </div>
+    if (errorPage) return <ErrorPage statusCode={404} />
 
     return (
         <div className={s.details}>
-            <h1 className={s.header}>Details/{application.title}</h1>
+            <h1 className={s.header}>Details/{currentApp?.title}</h1>
             <div className={s.container}>
                 <div className={s.markdown}>
                     {!isOwner() && <DynamicViewerNoSSR value={documentation} />}
                     {isOwner() && <DynamicEditorNoSSR handleChange={updateMarkdown} value={documentation} />}
                 </div>
                 <div className={s.metadata}>
-                    <div className="meta__by">By {application.by}</div>
+                    <div className="meta__by">By {currentApp?.by}</div>
                     <div className="meta__by">Update: {date.toGMTString()}</div>
                     <div style={{ paddingTop: '.5rem' }} className="filters">
-                        {filterList}
+                        {currentApp?.groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-active">{filter.trim()}</button>)}
                     </div>
                     {!isOwner() && (<a href={external || "/"} target="_blank" rel="noopener noreferrer" className={s.link}>
                         {external || "no external link"}

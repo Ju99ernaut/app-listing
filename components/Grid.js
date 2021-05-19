@@ -25,6 +25,7 @@ class Navbar extends React.Component {
             ratings: [],
             reviews: [],
             page: 0,
+            pageSize: 24,
             hasMore: true,
         };
     }
@@ -62,7 +63,7 @@ class Navbar extends React.Component {
             .then(res => res.json())
             .then(res => {
                 this.setState(state => ({
-                    hasMore: res.count > state.page * 50 + 50
+                    hasMore: res.count > state.page * state.pageSize + state.pageSize
                 }))
                 console.log(res);
             })
@@ -70,7 +71,7 @@ class Navbar extends React.Component {
     }
 
     loadApps = () => {
-        fetch(`${config.apiEndpoint}apps?page=${this.state.page}`)
+        fetch(`${config.apiEndpoint}apps?page=${this.state.page}&size=${this.state.pageSize}`)
             .then(res => res.json())
             .then(res => {
                 this.setState(state => ({
@@ -83,7 +84,7 @@ class Navbar extends React.Component {
     }
 
     loadRatings = () => {
-        fetch(`${config.apiEndpoint}ratings/averages?page=${this.state.page}`)
+        fetch(`${config.apiEndpoint}ratings/averages?page=${this.state.page}&size=${this.state.pageSize}`)
             .then(res => res.json())
             .then(res => {
                 this.setState(state => ({
