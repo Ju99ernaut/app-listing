@@ -3,6 +3,7 @@ import Loader from './Loader';
 import Item from './Item';
 import Modal from './Modal';
 import AppDetail from './AppDetail';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
 import imagesLoaded from '../utils/imagesLoaded';
@@ -23,14 +24,15 @@ class Navbar extends React.Component {
             applications: [],
             ratings: [],
             reviews: [],
+            page: 0,
+            hasMore: true,
         };
     }
 
     componentDidMount() {
         imagesLoaded(this.element.current, this._initShuffle);
         this.addSearchEvent();
-        this.loadApps();
-        this.loadRatings();
+        this.fetchData();
     }
 
     componentDidUpdate() {
@@ -46,13 +48,34 @@ class Navbar extends React.Component {
         this.loadReviews(this.state.currentApp.title);
     }
 
-    loadApps = () => {
-        fetch(`${config.apiEndpoint}apps`)
+    fetchData = () => {
+        this.loadApps();
+        this.loadRatings();
+        this.setState(state => ({
+            page: state.page + 1
+        }))
+        this.hasMore();
+    }
+
+    hasMore = () => {
+        fetch(`${config.apiEndpoint}meta/apps`)
             .then(res => res.json())
             .then(res => {
-                this.setState({
-                    applications: res
-                });
+                this.setState(state => ({
+                    hasMore: res.count > state.page * 50 + 50
+                }))
+                console.log(res);
+            })
+            .catch(err => console.log("Networt error"));
+    }
+
+    loadApps = () => {
+        fetch(`${config.apiEndpoint}apps?page=${this.state.page}`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState(state => ({
+                    applications: [...state.applications, ...res]
+                }));
                 this.loader.current.style.display = 'none';
                 console.log(res);
             })
@@ -60,12 +83,12 @@ class Navbar extends React.Component {
     }
 
     loadRatings = () => {
-        fetch(`${config.apiEndpoint}ratings/averages`)
+        fetch(`${config.apiEndpoint}ratings/averages?page=${this.state.page}`)
             .then(res => res.json())
             .then(res => {
-                this.setState({
-                    ratings: res
-                });
+                this.setState(state => ({
+                    ratings: [...state.ratings, ...res]
+                }));
                 console.log(res);
             })
             .catch(err => console.log("Networt error"));
@@ -177,13 +200,20 @@ class Navbar extends React.Component {
                         <button name="profile" onClick={this.props.profileMd} className="btn" style={{ display: this.props.auth() ? '' : 'none' }}>My Profile</button>
                     </div>
                 </div>
-                <div ref={this.element} className="grid">
-                    <div ref={this.loader} className="loader">
-                        <Loader />
+                <InfiniteScroll
+                    dataLength={this.state.applications.length}
+                    next={this.fetchData}
+                    hasMore={this.state.hasMore}
+                    loader={<Loader />}
+                >
+                    <div ref={this.element} className="grid">
+                        <div ref={this.loader} className="loader">
+                            <Loader />
+                        </div>
+                        <div ref={this.sizer} className="grid__sizer"></div>
+                        {this.buildItemsList()}
                     </div>
-                    <div ref={this.sizer} className="grid__sizer"></div>
-                    {this.buildItemsList()}
-                </div>
+                </InfiniteScroll>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
                     <h2>{this.state.currentApp?.title}</h2>
                     <AppDetail app={this.state.currentApp} auth={this.props.auth} authorization={this.props.authorization} reviews={this.state.reviews} reload={this.reload} />
