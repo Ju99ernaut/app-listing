@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import fetch from '../utils/fetch';
 import config from '../config';
 
-const ListForm = ({ authorization }) => {
+const ListForm = ({ authorization, close }) => {
     const formList = useRef(null);
 
     const submitListing = e => {
@@ -13,7 +13,10 @@ const ListForm = ({ authorization }) => {
             body: new FormData(formList.current)
         })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                close();
+            })
             .catch(err => console.log("Networt error"));
         formList.current.reset();
     }

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import fetch from '../utils/fetch';
 import config from '../config';
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, close }) => {
     const formLogin = useRef(null);
 
     const submitLogin = e => {
@@ -12,6 +12,7 @@ const LoginForm = ({ login }) => {
             .then(res => {
                 login(res);
                 console.log(res);
+                close();
             })
             .catch(err => console.log("Networt error"));
         formLogin.current.reset();
