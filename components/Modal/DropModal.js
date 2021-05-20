@@ -106,7 +106,7 @@ const DropModal = modalFactory({
             bottom: 0,
             left: 0,
             zIndex: 1040,
-            backgroundColor: '#00000080',
+            backgroundColor: 'rgba(0,0,0,0.9)',
             animationDuration: (willHidden ? hideAnimation : showAnimation).animationDuration,
             animationFillMode: 'forwards',
             animationName: willHidden ? hideBackdropAnimation : showBackdropAnimation,

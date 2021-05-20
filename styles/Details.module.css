@@ -43,3 +43,18 @@
 .sr {
     display: none;
 }
+
+@media screen and (max-width: 50em) {
+    .container {
+        flex-wrap: wrap;
+    }
+
+    .metadata,
+    .markdown {
+        width: 100%;
+    }
+
+    .metadata {
+        margin-top: 1rem;
+    }
+}

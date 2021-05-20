@@ -98,7 +98,7 @@ code {
     margin-right: .5rem;
     margin-bottom: .5rem;
     border-radius: .5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background-color: var(--secondary-background);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
     cursor: pointer;
@@ -116,7 +116,7 @@ code {
 
 .btn {
     height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     outline: none;
     margin-right: .5rem;
     margin-top: .5rem;
@@ -130,6 +130,11 @@ code {
 
 .btn:hover {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn.btn-profile {
+    margin-top: 0;
+    padding: .7rem;
 }
 
 .btn.btn-login {
@@ -227,7 +232,7 @@ code {
     margin-top: .25rem;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
     color: var(--primary-color);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: .5rem;
     width: 12rem;
     top: 5rem;
@@ -341,7 +346,7 @@ code {
 .search-input {
     height: 2.5rem;
     width: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: .5rem;
     outline: none;
     font-size: 0.875rem;
@@ -426,6 +431,30 @@ code {
     animation: fadein 1s ease;
 }
 
+.profile-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-info .username {
+    min-width: 50%;
+}
+
+.profile-info .submit {
+    height: 100%;
+    width: 25%;
+    margin-top: 3rem;
+}
+
+.profile-table {
+    overflow-x: auto;
+}
 
 /* TABLES */
 table,
@@ -532,8 +561,16 @@ table th {
     overflow-y: auto;
     background-color: var(--secondary-color);
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border-radius: 1rem;
+    border-radius: .5rem;
     padding: 1rem;
+}
+
+.modal.sm {
+    width: 400px;
+}
+
+.modal.lg {
+    width: 1100px;
 }
 
 .modal.dark {
@@ -638,8 +675,15 @@ input[type="submit"]:hover {
 }
 
 @media screen and (max-width: 50em) {
-    .modal {
+
+    .modal,
+    .modal.lg,
+    .modal.sm {
         width: 90%;
+    }
+
+    .profile-info {
+        flex-wrap: wrap;
     }
 
     .logo {
