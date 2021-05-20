@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Stars';
 
 const Profile = ({ user, apps, ratings, authorization }) => {
     const formUser = useRef(null);
+    const [msg, setMsg] = useState("A confimation email has been sent.")
 
     const submitUpdate = e => {
         e.preventDefault();
@@ -15,6 +16,20 @@ const Profile = ({ user, apps, ratings, authorization }) => {
         })
             .then(res => res.json())
             .then(res => console.log(res))
+            .catch(err => console.log("Networt error"));
+    }
+
+    const resend = () => {
+        setMsg("Email will be sent shortly...");
+        fetch(`${config.apiEndpoint}resend`, {
+            headers: new Headers({ authorization })
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.detail) setMsg("Failed to send please try again...");
+                else setMsg("Email sent...");
+            })
             .catch(err => console.log("Networt error"));
     }
 
@@ -42,36 +57,58 @@ const Profile = ({ user, apps, ratings, authorization }) => {
         )
     });
 
+    // <input type="text" id="email2" name="email2" value={user.email} onChange={() => { }} placeholder="email" />
+
+    if (!user) return (
+        <div>
+            <p className="info">Session timed out...</p>
+        </div>
+    )
+
     return (
         <div>
-            <form ref={formUser} onSubmit={submitUpdate}>
-                <input type="text" id="username3" name="username3" value={user.username} onChange={() => { }} placeholder="username" required />
-                <input type="text" id="email2" name="email2" value={user.email} onChange={() => { }} placeholder="email" />
-                <input type="submit" value="Update" />
-            </form>
             <div className="meta__by">Joined: {new Date(user.joined).toGMTString()}</div>
-            <p className="meta__by">Your Applications:</p>
-            <table>
-                <tr key={0}>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Updated</th>
-                    <th>By</th>
-                    <th>Groups</th>
-                </tr>
-                {appList}
-            </table>
-            <p className="meta__by">Your Comments:</p>
-            <table>
-                <tr key={0}>
-                    <th>ID</th>
-                    <th>Application</th>
-                    <th>Updated</th>
-                    <th>Comment</th>
-                    <th>Rating</th>
-                </tr>
-                {ratingsList}
-            </table>
+            {!user.active && (<div>
+                <p className="info">{msg}</p>
+                <button name="resend" className="btn" onClick={resend}>Resend</button>
+            </div>)}
+            {user.active && (<form ref={formUser} onSubmit={submitUpdate}>
+                <div className="profile-info">
+                    <div className="username">
+                        <p className="meta__by">Username:</p>
+                        <input type="text" id="username3" name="username3" value={user.username} onChange={() => { }} placeholder="username" required />
+                    </div>
+                    <input className="submit" type="submit" value="Update" />
+                </div>
+            </form>)}
+            <div className="profile-info">
+                <div className="profile-table">
+                    <p className="meta__by">Your Applications:</p>
+                    <table>
+                        <tr key={0}>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Updated</th>
+                            <th>By</th>
+                            <th>Groups</th>
+                        </tr>
+                        {appList}
+                    </table>
+                </div>
+                <div className="profile-table">
+                    <p className="meta__by">Your Comments:</p>
+                    <table>
+                        <tr key={0}>
+                            <th>ID</th>
+                            <th>Application</th>
+                            <th>Updated</th>
+                            <th>Comment</th>
+                            <th>Rating</th>
+                        </tr>
+                        {ratingsList}
+                    </table>
+                </div>
+            </div>
             <p className="info">Actions are not yet implemented but you can modify data using the API at {config.apiEndpoint}docs</p>
         </div>
     );

@@ -67,8 +67,9 @@ class Layout extends Component {
         }
     }
 
-    login = ({ access_token, token_type }) => {
+    login = ({ access_token, token_type, expires_in }) => {
         const authorization = `${token_type} ${access_token}`;
+        setTimeout(this.logout, (expires_in - 90) * 1000);
         fetch(`${config.apiEndpoint}users/me`, {
             headers: new Headers({ authorization })
         })
@@ -174,22 +175,22 @@ class Layout extends Component {
                 <Navbar auth={this.authenticated} username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
                 {this.props.children}
                 <Footer />
-                <Modal ref={this.mdlLogin} className="modal" keyboard={true}>
+                <Modal ref={this.mdlLogin} className="modal sm" keyboard={true}>
                     <h2>Login</h2>
-                    <LoginForm login={this.login} />
+                    <LoginForm login={this.login} close={() => this.hideMdl('login')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('login')}>×</button>
                 </Modal>
-                <Modal ref={this.mdlRegister} className="modal" keyboard={true}>
+                <Modal ref={this.mdlRegister} className="modal sm" keyboard={true}>
                     <h2>Register</h2>
-                    <RegisterForm login={this.login} />
+                    <RegisterForm login={this.login} close={() => this.hideMdl('register')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('register')}>×</button>
                 </Modal>
                 <Modal ref={this.mdlList} className="modal" keyboard={true}>
                     <h2>List App</h2>
-                    <ListForm authorization={this.state.token} />
+                    <ListForm authorization={this.state.token} close={() => this.hideMdl('list')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('list')}>×</button>
                 </Modal>
-                <Modal ref={this.mdlProfile} className="modal" keyboard={true}>
+                <Modal ref={this.mdlProfile} className="modal lg" keyboard={true}>
                     <h2>User Profile</h2>
                     <Profile user={this.state.user} apps={this.state.userApps} ratings={this.state.userRatings} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>

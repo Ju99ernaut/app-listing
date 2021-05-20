@@ -198,7 +198,7 @@ class Navbar extends React.Component {
                                 </svg>
                             </button>
                         </div>
-                        <button name="profile" onClick={this.props.profileMd} className="btn" style={{ display: this.props.auth() ? '' : 'none' }}>My Profile</button>
+                        <button name="profile" onClick={this.props.profileMd} className="btn btn-profile" style={{ display: this.props.auth() ? '' : 'none' }}>My Profile</button>
                     </div>
                 </div>
                 <InfiniteScroll
