@@ -46,7 +46,7 @@ class Navbar extends React.Component {
     }
 
     reload = () => {
-        this.loadReviews(this.state.currentApp.title);
+        this.loadReviews(this.state.currentApp.id);
     }
 
     fetchData = () => {
@@ -65,7 +65,6 @@ class Navbar extends React.Component {
                 this.setState(state => ({
                     hasMore: res.count > state.page * state.pageSize + state.pageSize
                 }))
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }
@@ -78,7 +77,6 @@ class Navbar extends React.Component {
                     applications: [...state.applications, ...res]
                 }));
                 this.loader.current.style.display = 'none';
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }
@@ -90,7 +88,6 @@ class Navbar extends React.Component {
                 this.setState(state => ({
                     ratings: [...state.ratings, ...res]
                 }));
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }
@@ -102,7 +99,6 @@ class Navbar extends React.Component {
                 this.setState({
                     reviews: res
                 });
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }

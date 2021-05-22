@@ -51,7 +51,7 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
                 </Link>
             </div>
             <div style={{ display: 'none' }} ref={revs}>
-                <Reviews auth={auth} authorization={authorization} application={app.title} reviews={reviews} reload={reload} />
+                <Reviews auth={auth} authorization={authorization} application={app.id} reviews={reviews} reload={reload} />
             </div>
         </div>
     );

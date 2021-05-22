@@ -76,7 +76,6 @@ class Layout extends Component {
             .then(res => res.json())
             .then(res => {
                 this._login(authorization, res);
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }
@@ -122,7 +121,6 @@ class Layout extends Component {
                 this.setState({
                     userApps: res
                 });
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }
@@ -142,7 +140,6 @@ class Layout extends Component {
                 this.setState({
                     userRatings: res
                 });
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }

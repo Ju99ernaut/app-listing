@@ -5,14 +5,14 @@ import Stars from './Stars';
 
 const Profile = ({ user, apps, ratings, authorization }) => {
     const formUser = useRef(null);
-    const [msg, setMsg] = useState("A confimation email has been sent.")
+    const [msg, setMsg] = useState("A confimation email has been sent.");
 
     const submitUpdate = e => {
         e.preventDefault();
         fetch(`${config.apiEndpoint}users/me`, {
             headers: new Headers({ authorization }),
             method: 'PUT',
-            body: new FormData(formUser.current)
+            body: JSON.stringify(Object.fromEntries(new FormData(formUser.current)))
         })
             .then(res => res.json())
             .then(res => console.log(res))
@@ -76,7 +76,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 <div className="profile-info">
                     <div className="username">
                         <p className="meta__by">Username:</p>
-                        <input type="text" id="username3" name="username3" value={user.username} onChange={() => { }} placeholder="username" required />
+                        <input type="text" id="username3" name="username" value={user.username} onChange={() => { }} placeholder="username" required />
                     </div>
                     <input className="submit" type="submit" value="Update" />
                 </div>

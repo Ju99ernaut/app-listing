@@ -43,7 +43,6 @@ const Detail = ({ data }) => {
                     setErrorPage(false);
                     setCurrentApp(res);
                 }
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     }, []);
@@ -63,8 +62,6 @@ const Detail = ({ data }) => {
                     external: url
                 })
             })
-            .then(res => res.json())
-            .then(res => console.log(res))
             .catch(err => console.log("Networt error"));
     }
 
