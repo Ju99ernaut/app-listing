@@ -14,6 +14,7 @@ Template for app-listing webapp built to work with [app-listing-server](https://
 - [ ] Markdown dark mode.
 - [ ] Notifications.
 - [ ] Session mgnt.
+- [ ] All API actions
 
 ## Configuring
 
