@@ -1,12 +1,13 @@
 import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Stars';
+import { useState } from 'react';
 
 const Reviews = ({ reviews, application, auth, authorization, reload }) => {
-    let rating = 5;
-    let comment = "";
-    const onChangeStars = value => rating = value;
-    const onChangeComment = value => comment = value;
+    const [rating, setRating] = useState(5);
+    const [comment, setComment] = useState("");
+    const onChangeStars = value => setRating(value);
+    const onChangeComment = e => setComment(e.target.value);
     const onClick = () => {
         fetch(`${config.apiEndpoint}ratings/${application}`, {
             headers: new Headers({ authorization }),
@@ -16,7 +17,6 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
             .then(res => res.json())
             .then(res => {
                 reload();
-                console.log(res);
             })
             .catch(err => console.log("Networt error"));
     };
@@ -40,9 +40,9 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
             <div style={{ display: auth() ? '' : 'none' }}>
                 <p className="info">You can only add one rating per app, sending another one will overwrite the previous one</p>
                 <div className="flex">
-                    <input onChange={onChangeComment} type="text" id="comment" name="comment" placeholder="comment" />
+                    <input onChange={onChangeComment} value={comment} type="text" id="comment" name="comment" placeholder="comment" />
                     <div style={{ minWidth: '105px' }} >
-                        <Stars onChange={onChangeStars} edit={true} />
+                        <Stars onChange={onChangeStars} edit={true} rating={rating} />
                     </div>
                 </div>
                 <button onClick={onClick} className="btn">Add Rating</button>
