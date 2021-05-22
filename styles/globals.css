@@ -454,6 +454,8 @@ code {
 
 .profile-table {
     overflow-x: auto;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 /* TABLES */
