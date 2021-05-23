@@ -81,15 +81,11 @@ class Layout extends Component {
     }
 
     _authenticate = (token, user) => {
-        const myData = () => {
-            this._loadApps();
-            this._loadRatings();
-        };
         this.setState({
             token,
             user,
             username: user.username
-        }, myData);
+        }, this.myData);
     }
 
     _login = (token, user) => {
@@ -105,6 +101,11 @@ class Layout extends Component {
     //    const user = JSON.parse(localStorage.getItem('user'));
     //    this._authenticate(token, user);
     //}
+
+    myData = () => {
+        this._loadApps();
+        this._loadRatings();
+    };
 
     _loadApps = () => {
         fetch(`${config.apiEndpoint}apps/me`, {
@@ -165,11 +166,16 @@ class Layout extends Component {
 
     render() {
         const { user, token } = this.state;
-        const { authenticated, showMdl } = this;
+        const { authenticated, showMdl, myData } = this;
 
         return (
-            <LayoutProvider value={{ user, token, authenticated, showMdl }}>
-                <Navbar auth={this.authenticated} username={this.state.username} loginMd={() => this.showMdl('login')} regMd={() => this.showMdl('register')} listMd={() => this.showMdl('list')} profileMd={() => this.showMdl('profile')} logout={this.logout} />
+            <LayoutProvider value={{ user, token, authenticated, showMdl, myData }}>
+                <Navbar auth={authenticated} user={user} loginMd={() => showMdl('login')} regMd={() => showMdl('register')} listMd={() => showMdl('list')} profileMd={() => showMdl('profile')} logout={this.logout} />
+                {user && !user?.active && (
+                    <div style={{ padding: '1em' }}>
+                        <p className="info">A confirmation link has been sent to your email. The link will expire after one hour. You can get a new link from the profile modal.</p>
+                    </div>
+                )}
                 {this.props.children}
                 <Footer />
                 <Modal ref={this.mdlLogin} className="modal sm" keyboard={true}>
@@ -184,12 +190,12 @@ class Layout extends Component {
                 </Modal>
                 <Modal ref={this.mdlList} className="modal" keyboard={true}>
                     <h2>List App</h2>
-                    <ListForm authorization={this.state.token} close={() => this.hideMdl('list')} />
+                    <ListForm authorization={token} close={() => this.hideMdl('list')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('list')}>×</button>
                 </Modal>
                 <Modal ref={this.mdlProfile} className="modal lg" keyboard={true}>
                     <h2>User Profile</h2>
-                    <Profile user={this.state.user} apps={this.state.userApps} ratings={this.state.userRatings} />
+                    <Profile user={user} apps={this.state.userApps} ratings={this.state.userRatings} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>
                 </Modal>
             </LayoutProvider>

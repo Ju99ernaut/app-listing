@@ -472,6 +472,10 @@ code {
     margin-right: 5px;
 }
 
+.app-link {
+    color: #f40;
+}
+
 /* TABLES */
 table,
 th,

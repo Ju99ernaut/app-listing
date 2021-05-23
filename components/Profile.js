@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Base/Stars';
+import Link from 'next/link';
 
 const Profile = ({ user, apps, ratings, authorization }) => {
     const formUser = useRef(null);
@@ -36,7 +37,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
     const appList = apps.map(app => {
         return (
             <tr key={app.id}>
-                <td>{app.id}</td>
+                <td><Link href={`/details/${app.id}`}><a class="app-link">{app.id}</a></Link></td>
                 <td>{app.title}</td>
                 <td>{app.updated}</td>
                 <td>{app.by}</td>
