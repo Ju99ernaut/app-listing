@@ -1,9 +1,9 @@
 :root {
-    --primary-background: #232931;
-    --secondary-background: #393e46;
+    --primary-background: #191d22;
+    --secondary-background: #25282e;
     --primary-color: #ececec;
-    --secondary-color: #2d3238;
-    --tertiary-color: #4d4d4d;
+    --secondary-color: #272d33;
+    --tertiary-color: #2e2e2e;
 }
 
 * ::-webkit-scrollbar {
