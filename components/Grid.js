@@ -213,13 +213,13 @@ class Navbar extends React.Component {
                         <button name="profile" onClick={this.props.profileMd} className="btn btn-profile" style={{ display: this.props.auth() ? '' : 'none' }}>My Profile</button>
                     </div>
                 </div>
+                {this.state.isListEmpty && <Empty />}
                 <InfiniteScroll
                     dataLength={this.state.applications.length}
                     next={this.fetchData}
                     hasMore={this.state.hasMore}
                     loader={<div className="loader"><Loader /></div>}
                 >
-                    {this.state.isListEmpty && <Empty />}
                     <div ref={this.element} className="grid">
                         <div ref={this.sizer} className="grid__sizer"></div>
                         {this.buildItemsList()}
