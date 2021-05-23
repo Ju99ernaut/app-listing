@@ -37,7 +37,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
     const appList = apps.map(app => {
         return (
             <tr key={app.id}>
-                <td><Link href={`/details/${app.id}`}><a class="app-link">{app.id}</a></Link></td>
+                <td><Link href={`/details/${app.id}`}><a className="app-link">{app.id}</a></Link></td>
                 <td>{app.title}</td>
                 <td>{app.updated}</td>
                 <td>{app.by}</td>
