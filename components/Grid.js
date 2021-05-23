@@ -3,6 +3,7 @@ import Loader from './Base/Loader';
 import Item from './Item';
 import Modal from './Modal';
 import AppDetail from './AppDetail';
+import Empty from './Base/Empty';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Shuffle from 'shufflejs';
 import throttle from '../utils/throttle';
@@ -14,7 +15,6 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props);
         this.buttons = React.createRef();
-        this.loader = React.createRef();
         this.search = React.createRef();
         this.element = React.createRef();
         this.sizer = React.createRef();
@@ -27,6 +27,7 @@ class Navbar extends React.Component {
             page: 0,
             pageSize: 24,
             hasMore: true,
+            isListEmpty: false,
         };
     }
 
@@ -49,12 +50,21 @@ class Navbar extends React.Component {
         this.loadReviews(this.state.currentApp.id);
     }
 
+    reset = () => {
+        this.setState({
+            applications: [],
+            ratings: [],
+            page: 0
+        });
+        this.fetchData();
+    }
+
     fetchData = () => {
         this.loadApps();
         this.loadRatings();
         this.setState(state => ({
             page: state.page + 1
-        }))
+        }));
         this.hasMore();
     }
 
@@ -76,7 +86,6 @@ class Navbar extends React.Component {
                 this.setState(state => ({
                     applications: [...state.applications, ...res]
                 }));
-                this.loader.current.style.display = 'none';
             })
             .catch(err => console.log("Networt error"));
     }
@@ -86,7 +95,8 @@ class Navbar extends React.Component {
             .then(res => res.json())
             .then(res => {
                 this.setState(state => ({
-                    ratings: [...state.ratings, ...res]
+                    ratings: [...state.ratings, ...res],
+                    isListEmpty: !state.applications.length || !this.element.current?.querySelector('.shuffle-item--visible')
                 }));
             })
             .catch(err => console.log("Networt error"));
@@ -149,6 +159,9 @@ class Navbar extends React.Component {
         if (filter) this.shuffle.filter(filter);
         else this.shuffle.filter();
         this.shuffle.layout();
+        setTimeout(() => this.setState(state => ({
+            isListEmpty: !state.applications.length || !this.element.current?.querySelector('.shuffle-item--visible')
+        })), 600);
     }
 
     addSearchEvent = () => {
@@ -201,12 +214,10 @@ class Navbar extends React.Component {
                     dataLength={this.state.applications.length}
                     next={this.fetchData}
                     hasMore={this.state.hasMore}
-                    loader={<Loader />}
+                    loader={<div className="loader"><Loader /></div>}
                 >
+                    {this.state.isListEmpty && <Empty />}
                     <div ref={this.element} className="grid">
-                        <div ref={this.loader} className="loader">
-                            <Loader />
-                        </div>
                         <div ref={this.sizer} className="grid__sizer"></div>
                         {this.buildItemsList()}
                     </div>
