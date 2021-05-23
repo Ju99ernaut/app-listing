@@ -86,6 +86,9 @@ class Navbar extends React.Component {
                 this.setState(state => ({
                     applications: [...state.applications, ...res]
                 }));
+                this.setState(state => ({
+                    isListEmpty: !state.applications.length || !this.element.current?.querySelector('.shuffle-item--visible')
+                }));
             })
             .catch(err => console.log("Networt error"));
     }
