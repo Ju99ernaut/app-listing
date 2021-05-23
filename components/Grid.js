@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from './Loader';
+import Loader from './Base/Loader';
 import Item from './Item';
 import Modal from './Modal';
 import AppDetail from './AppDetail';

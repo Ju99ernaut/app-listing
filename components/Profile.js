@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import fetch from '../utils/fetch';
 import config from '../config';
-import Stars from './Stars';
+import Stars from './Base/Stars';
 
 const Profile = ({ user, apps, ratings, authorization }) => {
     const formUser = useRef(null);

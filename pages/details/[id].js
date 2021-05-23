@@ -16,12 +16,12 @@ export const getServerSideProps = async ({ params }) => {
 }
 
 const DynamicViewerNoSSR = dynamic(
-    () => import('../../components/DynamicViewer'),
+    () => import('../../components/Markdown/DynamicViewer'),
     { ssr: false }
 )
 
 const DynamicEditorNoSSR = dynamic(
-    () => import('../../components/DynamicEditor'),
+    () => import('../../components/Markdown/DynamicEditor'),
     { ssr: false }
 )
 

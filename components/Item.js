@@ -1,4 +1,4 @@
-import Stars from './Stars';
+import Stars from './Base/Stars';
 
 const Item = ({ app, groups, rating, appMd }) => {
     const { key, image, title, by } = app;

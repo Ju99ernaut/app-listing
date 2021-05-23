@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import fetch from '../utils/fetch';
-import config from '../config';
+import fetch from '../../utils/fetch';
+import config from '../../config';
 
 const ListForm = ({ authorization, close }) => {
     const formList = useRef(null);

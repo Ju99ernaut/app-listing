@@ -1,6 +1,6 @@
 import fetch from '../utils/fetch';
 import config from '../config';
-import Stars from './Stars';
+import Stars from './Base/Stars';
 import { useState } from 'react';
 
 const Reviews = ({ reviews, application, auth, authorization, reload }) => {

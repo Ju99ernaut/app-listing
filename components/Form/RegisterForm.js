@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import fetch from '../utils/fetch';
-import config from '../config';
+import fetch from '../../utils/fetch';
+import config from '../../config';
 
 const RegisterForm = ({ login, close }) => {
     const formRegister = useRef(null);

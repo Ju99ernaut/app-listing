@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Footer from '../components/Base/Footer';
 import Modal from '../components/Modal';
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
-import ListForm from '../components/ListForm';
+import LoginForm from '../components/Form/LoginForm';
+import RegisterForm from '../components/Form/RegisterForm';
+import ListForm from '../components/Form/ListForm';
 import Profile from '../components/Profile';
 import { LayoutProvider } from '../contexts/LayoutContext';
 import config from '../config';
