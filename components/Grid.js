@@ -199,7 +199,7 @@ class Navbar extends React.Component {
                         <button name="facebook" onClick={e => this.filter(e, 'facebook')} className="btn">Facebook</button>
                         <button name="bots" onClick={e => this.filter(e, 'bots')} className="btn">Bots</button>
                         <button name="tools" onClick={e => this.filter(e, 'tools')} className="btn">Tools</button>
-                        <button name="interaction" onClick={e => this.filter(e, 'interactions')} className="btn">Viewers Interaction</button>
+                        <button name="interaction" onClick={e => this.filter(e, 'interactions')} className="btn">Interactions</button>
                     </div>
                     <div className="flex">
                         <div className="search-container">

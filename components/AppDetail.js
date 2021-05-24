@@ -42,8 +42,8 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
                 <div style={{ paddingTop: '.5rem' }} className="filters">
                     {filterList}
                 </div>
-                <div className="meta__by">Status:
-                    <button name={app.status.trim() || 'not available'} className="btn btn-status">{app.status.trim() || 'not available'}</button>
+                <div className="meta__by">Status:&nbsp;&nbsp;&nbsp;
+                    <button name={app.status.trim() || 'not provided'} className="btn btn-status">{app.status.trim() || 'not provided'}</button>
                 </div>
                 <p>{description}</p>
                 <Link href={`/details/${app.id}`}>
