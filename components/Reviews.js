@@ -36,7 +36,10 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
 
     return (
         <div className="app-reviews">
-            {ratingsList}
+            {ratingsList.length ? ratingsList : (<div className="review">
+                <span className="meta__by">Info:</span>
+                <div>This listing has no reviews yet</div>
+            </div>)}
             <div style={{ display: auth() ? '' : 'none' }}>
                 <p className="info">You can only add one rating per app, sending another one will overwrite the previous one</p>
                 <div className="flex">
@@ -45,7 +48,7 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
                         <Stars onChange={onChangeStars} edit={true} rating={rating} />
                     </div>
                 </div>
-                <button onClick={onClick} className="btn">Add Rating</button>
+                <button onClick={onClick} className="btn">Leave Review</button>
             </div>
         </div>
     );

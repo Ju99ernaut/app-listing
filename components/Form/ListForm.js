@@ -38,10 +38,11 @@ const ListForm = ({ authorization, close }) => {
     return (
         <form ref={formList} onSubmit={submitListing}>
             {showMsg && <p className="info">{msg}</p>}
-            <input type="text" id="title" name="title" placeholder="title" required />
-            <input type="text" id="image" name="image" placeholder="image url" />
-            <textarea name="description" id="description" placeholder="description" required></textarea>
-            <input type="text" id="groups" name="groups" placeholder="Add categories comma separated" />
+            <input type="text" id="title" name="title" placeholder="title..." required />
+            <input type="text" id="image" name="image" placeholder="image url e.g. https://web.site/img.png" />
+            <textarea name="description" id="description" placeholder="description..." required></textarea>
+            <input type="text" id="status" name="status" placeholder="status e.g. beta" />
+            <input type="text" id="groups" name="groups" placeholder="Categories comma separated e.g. bots,tools..." />
             <input type="submit" value="Add Listing" />
         </form>
     );
