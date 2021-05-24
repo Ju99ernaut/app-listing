@@ -7,8 +7,10 @@ const Dropdown = ({ hidden, user, list, profile, logout }) => {
             <div onClick={profile} className="link">
                 Profile
             </div>
-            {user?.active && <div onClick={list} className="link">
-                List App
+            {user?.active &&
+                (user.role === 'admin' || user.role === 'developer') &&
+                <div onClick={list} className="link">
+                    List App
             </div>}
             <div onClick={logout} className="link">
                 Logout
