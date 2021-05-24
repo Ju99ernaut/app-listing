@@ -73,12 +73,6 @@ const Detail = ({ data }) => {
         setMarkdown(markdown);
     }
 
-    //<div className="meta__by">
-    //     Status:
-    //     <button name={application.status.trim() || 'not available'} className="btn btn-status">
-    //         {application.status.trim() || 'not available'}
-    //     </button>
-    // </div>
     if (errorPage) return <ErrorPage statusCode={404} />
 
     return (
