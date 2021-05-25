@@ -22,12 +22,32 @@ class Layout extends Component {
             user: null,
             userApps: [],
             userRatings: [],
+            msg: '',
         };
     }
 
-    //componentDidMount() {
-    //    this._autoLogin();
-    //}
+    componentDidMount() {
+        //this._autoLogin();
+        const frag = new URLSearchParams(window.location.hash.slice(1));
+        window.location.hash = "";
+        history.pushState('', document.title, `${window.location.pathname}${window.location.search}`);
+        if (frag.has('status')) {
+            const status = frag.get('status');
+            if (status === "confirmed") {
+                this.setState({
+                    msg: 'Account has been successfully activated, proceed to login...'
+                });
+            } else {
+                this.setState({
+                    msg: 'Account activation failed, the link may have expired, you can get a new one from the profile modal...'
+                });
+            }
+        } else {
+            this.setState({
+                msg: ''
+            });
+        }
+    }
 
     showMdl = (mdl) => {
         switch (mdl) {
@@ -174,6 +194,11 @@ class Layout extends Component {
                 {user && !user?.active && (
                     <div style={{ padding: '1em' }}>
                         <p className="info">A confirmation link has been sent to your email. The link will expire after one hour. You can get a new link from the profile modal.</p>
+                    </div>
+                )}
+                {!user && this.state.msg && (
+                    <div style={{ padding: '1em' }}>
+                        <p className="info">{this.state.msg}</p>
                     </div>
                 )}
                 {this.props.children}
