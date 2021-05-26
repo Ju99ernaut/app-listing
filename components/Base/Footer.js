@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const Footer = () => {
     return (
         <div className="footer">
@@ -7,7 +5,7 @@ const Footer = () => {
             <div className="flex">
                 Powered by
                 <a href="https://rally.io/creator/PRO" target="_blank" rel="noopener noreferrer">PlatformPro</a>
-                <Image width={40} height={40} src="/PlatformPro.svg" alt="coin-icon" />
+                <img width="40" height="40" src="/PlatformPro.svg" alt="icon" />
             </div>
         </div>
     );
