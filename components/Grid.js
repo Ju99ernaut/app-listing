@@ -201,7 +201,7 @@ class Navbar extends React.Component {
                         <button name="tools" onClick={e => this.filter(e, 'tools')} className="btn">Tools</button>
                         <button name="interaction" onClick={e => this.filter(e, 'interactions')} className="btn">Interactions</button>
                     </div>
-                    <div className="flex">
+                    <div style={{ display: 'flex' }}>
                         <div className="search-container">
                             <input ref={this.search} type="search" name="serch" placeholder="Search app..." className="search-input" />
                             <button type="submit" className="search-button">
