@@ -38,7 +38,7 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
             </div>
             <div ref={details} className="app-details">
                 <div className="meta__by">By {by}</div>
-                <div className="meta__by">Update: {date.toGMTString()}</div>
+                <div className="meta__by">Updated: {date.toGMTString()}</div>
                 <div style={{ paddingTop: '.5rem' }} className="filters">
                     {filterList}
                 </div>

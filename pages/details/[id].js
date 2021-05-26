@@ -5,6 +5,8 @@ import { useContext, useEffect, useState } from 'react';
 import ErrorPage from 'next/error';
 import LayoutContext from '../../contexts/LayoutContext';
 import browserFetch from '../../utils/fetch';
+import Reviews from '../../components/Reviews';
+import Stars from '../../components/Base/Stars';
 
 export const getServerSideProps = async ({ params }) => {
     const res = await fetch(`${config.apiEndpoint}documentation/app/${params.id}`);
@@ -31,6 +33,9 @@ const Detail = ({ data }) => {
     const ctx = useContext(LayoutContext);
     const [currentApp, setCurrentApp] = useState(null);
     const [errorPage, setErrorPage] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const [rating, setRating] = useState(0);
+    const [count, setCount] = useState(0);
     const [url, setUrl] = useState(external || "");
     const [markdown, setMarkdown] = useState(documentation || "Hello world");
 
@@ -45,7 +50,32 @@ const Detail = ({ data }) => {
                 }
             })
             .catch(err => console.log("Networt error"));
+
+        browserFetch(`${config.apiEndpoint}ratings/average/${appId}`)
+            .then(res => res.json())
+            .then(res => {
+                setRating(res.rating);
+            })
+            .catch(err => console.log("Networt error"));
+
+        browserFetch(`${config.apiEndpoint}meta/ratings/${appId}`)
+            .then(res => res.json())
+            .then(res => {
+                setCount(res.count);
+            })
+            .catch(err => console.log("Networt error"));
+
+        loadReviews();
     }, []);
+
+    const loadReviews = () => {
+        browserFetch(`${config.apiEndpoint}ratings/app/${appId}`)
+            .then(res => res.json())
+            .then(res => {
+                setReviews(res);
+            })
+            .catch(err => console.log("Networt error"));
+    }
 
     const isOwner = () => {
         if (!currentApp || !ctx.authenticated()) return false;
@@ -77,18 +107,23 @@ const Detail = ({ data }) => {
 
     return (
         <div className={s.details}>
-            <h1 className={s.header}>Details/{currentApp?.title}</h1>
+            <h1 className={s.header}>{currentApp?.title}</h1>
             <div className={s.container}>
                 <div className={s.markdown}>
                     {!isOwner() && <DynamicViewerNoSSR value={documentation} />}
                     {isOwner() && <DynamicEditorNoSSR handleChange={updateMarkdown} value={documentation} />}
                 </div>
                 <div className={s.metadata}>
-                    <div className="meta__by">By {currentApp?.by}</div>
-                    <div className="meta__by">Update: {date.toGMTString()}</div>
-                    <div style={{ paddingTop: '.5rem' }} className="filters">
-                        {currentApp?.groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-active">{filter.trim()}</button>)}
+                    <div className="app-image">
+                        <img src={currentApp?.image.startsWith('http') ? currentApp?.image : "/" + currentApp?.image} alt="app" />
                     </div>
+                    <div className="meta__by">Description:</div>
+                    <p>{currentApp?.description}</p>
+                    <div style={{ paddingTop: '.5rem' }} className="filters">
+                        {currentApp?.groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-category">{filter.trim()}</button>)}
+                    </div>
+                    <div className="meta__by">By {currentApp?.by}</div>
+                    <div className="meta__by">Updated: {date.toGMTString()}</div>
                     {!isOwner() && (<a href={external || "/"} target="_blank" rel="noopener noreferrer" className={s.link}>
                         {external || "no external link"}
                         <span>
@@ -103,6 +138,19 @@ const Detail = ({ data }) => {
                         <input type="text" id="external" name="external" value={url} onChange={updateExternal} placeholder="https://example.com" />
                         <button onClick={updateDocs} name="save" className="btn">Save</button>
                     </div>)}
+                </div>
+            </div>
+            <h2 className={s.header}>Reviews</h2>
+            <div className={s.container}>
+                <div className={s.reviewsContainer}>
+                    <Reviews auth={ctx.authenticated} authorization={ctx.token} application={appId} reviews={reviews} reload={loadReviews} />
+                </div>
+                <div className={s.ratingSummary}>
+                    <div className="meta__by">Average</div>
+                    <h2>{rating}</h2>
+                    <Stars rating={rating} edit={false} />
+                    <div className="meta__by">Reviews</div>
+                    <p>{count}</p>
                 </div>
             </div>
         </div>

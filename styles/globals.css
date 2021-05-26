@@ -169,6 +169,12 @@ code {
     background-color: #f40;
 }
 
+.btn.btn-category {
+    border-radius: 12.5px;
+    height: 25px;
+    padding: .25rem;
+}
+
 .btn.btn-status {
     border-radius: 12.5px;
     height: 25px;
