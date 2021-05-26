@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#000000" />
         <meta name="description" content="Webapp for rally community project listings" />
         <link rel="apple-touch-icon" href="/logo192.png" />
-        <title>Rally Commnity | App Listings</title>
+        <title>Rally Community | App Listings</title>
 
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#317EFB" />
