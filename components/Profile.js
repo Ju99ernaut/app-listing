@@ -27,7 +27,6 @@ const Profile = ({ user, apps, ratings, authorization }) => {
         })
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 if (res.detail) setMsg("Failed to send please try again...");
                 else setMsg("Email sent...");
             })
@@ -69,7 +68,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
     return (
         <div>
             <div className="meta__by">Joined: {new Date(user.joined).toGMTString()}</div>
-            {!user.active && (<div>
+            {user.active && (<div>
                 <p className="info">{msg}</p>
                 <button name="resend" className="btn" onClick={resend}>Resend</button>
             </div>)}

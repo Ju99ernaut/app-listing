@@ -220,7 +220,7 @@ class Layout extends Component {
                 </Modal>
                 <Modal ref={this.mdlProfile} className="modal lg" keyboard={true}>
                     <h2>User Profile</h2>
-                    <Profile user={user} apps={this.state.userApps} ratings={this.state.userRatings} />
+                    <Profile user={user} authorization={token} apps={this.state.userApps} ratings={this.state.userRatings} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>
                 </Modal>
             </LayoutProvider>
