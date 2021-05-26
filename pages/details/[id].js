@@ -146,10 +146,10 @@ const Detail = ({ data }) => {
                     <Reviews auth={ctx.authenticated} authorization={ctx.token} application={appId} reviews={reviews} reload={loadReviews} />
                 </div>
                 <div className={s.ratingSummary}>
-                    <div className="meta__by">Average</div>
-                    <h2>{rating}</h2>
-                    <Stars rating={rating} edit={false} />
-                    <div className="meta__by">Reviews</div>
+                    <div className="meta__by">Average Rating</div>
+                    <h2>{typeof rating === 'number' ? rating : 0}</h2>
+                    <Stars rating={typeof rating === 'number' ? rating : 0} edit={false} />
+                    <div className="meta__by">Number Of Reviews</div>
                     <p>{count}</p>
                 </div>
             </div>
