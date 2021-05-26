@@ -111,6 +111,15 @@ code {
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+.details-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+}
+
 .empty {
     display: flex;
     flex-direction: column;
