@@ -5,6 +5,7 @@ import Modal from '../components/Modal';
 import LoginForm from '../components/Form/LoginForm';
 import RegisterForm from '../components/Form/RegisterForm';
 import ListForm from '../components/Form/ListForm';
+import UpdateForm from '../components/Form/UpdateListingForm';
 import Profile from '../components/Profile';
 import { LayoutProvider } from '../contexts/LayoutContext';
 import config from '../config';
@@ -15,11 +16,13 @@ class Layout extends Component {
         this.mdlLogin = React.createRef();
         this.mdlRegister = React.createRef();
         this.mdlList = React.createRef();
+        this.mdlUpdate = React.createRef();
         this.mdlProfile = React.createRef();
         this.state = {
             token: null,
             username: null,
             user: null,
+            currentApp: null,
             userApps: [],
             userRatings: [],
             msg: '',
@@ -63,6 +66,9 @@ class Layout extends Component {
             case 'profile':
                 this.mdlProfile.current.show();
                 break;
+            case 'update':
+                this.mdlUpdate.current.show();
+                break;
             default:
                 break;
         }
@@ -82,9 +88,19 @@ class Layout extends Component {
             case 'profile':
                 this.mdlProfile.current.hide();
                 break;
+            case 'update':
+                this.mdlUpdate.current.hide();
+                break;
             default:
                 break;
         }
+    }
+
+    openUpdate = (app) => {
+        this.setState({
+            currentApp: app
+        });
+        this.showMdl('update');
     }
 
     login = ({ access_token, token_type, expires_in }) => {
@@ -218,9 +234,14 @@ class Layout extends Component {
                     <ListForm authorization={token} close={() => this.hideMdl('list')} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('list')}>×</button>
                 </Modal>
+                <Modal ref={this.mdlUpdate} className="modal" keyboard={true}>
+                    <h2>Update App</h2>
+                    <UpdateForm app={this.state.currentApp} authorization={token} close={() => this.hideMdl('update')} />
+                    <button name="close" className="btn btn-close" onClick={() => this.hideMdl('update')}>×</button>
+                </Modal>
                 <Modal ref={this.mdlProfile} className="modal lg" keyboard={true}>
                     <h2>User Profile</h2>
-                    <Profile user={user} authorization={token} apps={this.state.userApps} ratings={this.state.userRatings} />
+                    <Profile user={user} authorization={token} apps={this.state.userApps} ratings={this.state.userRatings} close={() => this.hideMdl('profile')} openUpdate={this.openUpdate} reload={myData} />
                     <button name="close" className="btn btn-close" onClick={() => this.hideMdl('profile')}>×</button>
                 </Modal>
             </LayoutProvider>

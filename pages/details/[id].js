@@ -143,7 +143,7 @@ const Detail = ({ data }) => {
             <h2 className={s.header}>Reviews</h2>
             <div className={s.container}>
                 <div className={s.reviewsContainer}>
-                    <Reviews auth={ctx.authenticated} authorization={ctx.token} application={appId} reviews={reviews} reload={loadReviews} />
+                    <Reviews auth={ctx.authenticated} authorization={ctx.token} application={appId} reviews={reviews} user={ctx.user} reload={loadReviews} />
                 </div>
                 <div className={s.ratingSummary}>
                     <div className="meta__by">Average Rating</div>

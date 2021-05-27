@@ -3,8 +3,10 @@ import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Base/Stars';
 import Link from 'next/link';
+import Pencil from './Icons/Pencil';
+import Trash from './Icons/Trash';
 
-const Profile = ({ user, apps, ratings, authorization }) => {
+const Profile = ({ user, apps, ratings, authorization, reload, close, openUpdate }) => {
     const formUser = useRef(null);
     const [msg, setMsg] = useState("A confimation email has been sent.");
 
@@ -33,6 +35,35 @@ const Profile = ({ user, apps, ratings, authorization }) => {
             .catch(err => console.log("Networt error"));
     }
 
+    const deleteApp = (id) => {
+        fetch(`${config.apiEndpoint}apps/${id}`, {
+            headers: new Headers({ authorization }),
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(res => {
+                reload();
+            })
+            .catch(err => console.log("Networt error"));
+    };
+
+    const deleteReview = (id) => {
+        fetch(`${config.apiEndpoint}ratings/${id}`, {
+            headers: new Headers({ authorization }),
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(res => {
+                reload();
+            })
+            .catch(err => console.log("Networt error"));
+    };
+
+    const updateApp = (app) => {
+        close();
+        openUpdate(app);
+    }
+
     const appList = apps.map(app => {
         return (
             <tr key={app.id}>
@@ -41,6 +72,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 <td>{app.updated}</td>
                 <td>{app.by}</td>
                 <td>{app.groups.join(' ')}</td>
+                <td><Pencil onClick={() => updateApp(app)} /> <Trash onClick={() => deleteApp(app.id)} /></td>
             </tr>
         )
     });
@@ -53,6 +85,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                 <td>{rating.updated}</td>
                 <td>{rating.comment}</td>
                 <td><Stars rating={rating.rating} edit={false} /></td>
+                <td><Trash onClick={() => deleteReview(review.id)} /></td>
             </tr>
         )
     });
@@ -68,7 +101,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
     return (
         <div>
             <div className="meta__by">Joined: {new Date(user.joined).toGMTString()}</div>
-            {user.active && (<div>
+            {!user.active && (<div>
                 <p className="info">{msg}</p>
                 <button name="resend" className="btn" onClick={resend}>Resend</button>
             </div>)}
@@ -91,6 +124,7 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                             <th>Updated</th>
                             <th>By</th>
                             <th>Groups</th>
+                            <th>Actions</th>
                         </tr>
                         {appList}
                     </table>
@@ -104,12 +138,13 @@ const Profile = ({ user, apps, ratings, authorization }) => {
                             <th>Updated</th>
                             <th>Comment</th>
                             <th>Rating</th>
+                            <th>Actions</th>
                         </tr>
                         {ratingsList}
                     </table>
                 </div>
             </div>
-            <p className="info">Actions are not yet implemented but you can modify data using the API at {config.apiEndpoint}docs</p>
+            <p className="info">More actions may be available from the API at {config.apiEndpoint}docs</p>
         </div>
     );
 };

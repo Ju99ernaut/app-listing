@@ -19,7 +19,7 @@ const ListForm = ({ authorization, close }) => {
             .then(res => res.json())
             .then(res => {
                 if (res.detail) {
-                    setMsg("Listing submission failedd");
+                    setMsg("Listing submission failed");
                     setShowMsg(true);
                 } else {
                     setMsg("Listing submitted");
