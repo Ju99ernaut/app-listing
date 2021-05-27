@@ -2,8 +2,9 @@ import fetch from '../utils/fetch';
 import config from '../config';
 import Stars from './Base/Stars';
 import { useState } from 'react';
+import Trash from './Icons/Trash';
 
-const Reviews = ({ reviews, application, auth, authorization, reload }) => {
+const Reviews = ({ reviews, application, auth, authorization, user, reload }) => {
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState("");
     const onChangeStars = value => setRating(value);
@@ -21,6 +22,23 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
             .catch(err => console.log("Networt error"));
     };
 
+    const deleteReview = (id) => {
+        fetch(`${config.apiEndpoint}ratings/${id}`, {
+            headers: new Headers({ authorization }),
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(res => {
+                reload();
+            })
+            .catch(err => console.log("Networt error"));
+    };
+
+    const isOwner = (review) => {
+        if (!auth()) return false;
+        return review === user.id;
+    }
+
     const ratingsList = reviews.map(review => {
         const date = new Date(review.updated);
 
@@ -30,6 +48,7 @@ const Reviews = ({ reviews, application, auth, authorization, reload }) => {
                 <span className="meta__by">{date.toGMTString()}</span>
                 <div>{review.comment}</div>
                 <Stars rating={review.rating} edit={false} />
+                {auth() && isOwner(review.user.id) && <Trash onClick={() => deleteReview(review.id)} className="details-icon" />}
             </div>
         )
     });

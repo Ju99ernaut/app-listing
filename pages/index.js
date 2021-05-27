@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className="App">
-      <Grid auth={ctx.authenticated} authorization={ctx.token} profileMd={() => ctx.showMdl('profile')} />
+      <Grid auth={ctx.authenticated} authorization={ctx.token} user={ctx.user} profileMd={() => ctx.showMdl('profile')} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Reviews from './Reviews';
 import Link from 'next/link';
 
-const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
+const AppDetail = ({ reviews, app, auth, authorization, user, reload }) => {
     const details = useRef(null);
     const revs = useRef(null);
     const buttons = useRef(null);
@@ -51,7 +51,7 @@ const AppDetail = ({ reviews, app, auth, authorization, reload }) => {
                 </Link>
             </div>
             <div style={{ display: 'none' }} ref={revs}>
-                <Reviews auth={auth} authorization={authorization} application={app.id} reviews={reviews} reload={reload} />
+                <Reviews auth={auth} authorization={authorization} user={user} application={app.id} reviews={reviews} reload={reload} />
             </div>
         </div>
     );

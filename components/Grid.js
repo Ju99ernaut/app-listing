@@ -227,7 +227,7 @@ class Navbar extends React.Component {
                 </InfiniteScroll>
                 <Modal ref={this.mdlApp} className="modal" keyboard={true}>
                     <h2>{this.state.currentApp?.title}</h2>
-                    <AppDetail app={this.state.currentApp} auth={this.props.auth} authorization={this.props.authorization} reviews={this.state.reviews} reload={this.reload} />
+                    <AppDetail app={this.state.currentApp} auth={this.props.auth} authorization={this.props.authorization} user={this.props.user} reviews={this.state.reviews} reload={this.reload} />
                     <button name="close" className="btn btn-close" onClick={this.hideMdl}>×</button>
                 </Modal>
             </div>
