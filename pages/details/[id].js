@@ -107,7 +107,10 @@ const Detail = ({ data }) => {
 
     return (
         <div className={s.details}>
-            <h1 className={s.header}>{currentApp?.title}</h1>
+            <h1 className={s.header}>
+                {currentApp?.title}&nbsp;
+                {currentApp?.status && <button name={currentApp?.status.trim()} className="btn btn-status">{currentApp?.status.trim()}</button>}
+            </h1>
             <div className={s.container}>
                 <div className={s.markdown}>
                     {!isOwner() && <DynamicViewerNoSSR value={documentation} />}
@@ -117,13 +120,13 @@ const Detail = ({ data }) => {
                     <div className="app-image">
                         <img src={currentApp?.image.startsWith('http') ? currentApp?.image : "/" + currentApp?.image} alt="app" />
                     </div>
-                    <div className="meta__by">Description:</div>
-                    <p>{currentApp?.description}</p>
+                    <div className="meta__by">By {currentApp?.by}</div>
+                    <div className="meta__by">Updated: {date.toGMTString()}</div>
                     <div style={{ paddingTop: '.5rem' }} className="filters">
                         {currentApp?.groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-category">{filter.trim()}</button>)}
                     </div>
-                    <div className="meta__by">By {currentApp?.by}</div>
-                    <div className="meta__by">Updated: {date.toGMTString()}</div>
+                    <div className="meta__by">Description:</div>
+                    <p>{currentApp?.description}</p>
                     {!isOwner() && (<a href={external || "/"} target="_blank" rel="noopener noreferrer" className={s.link}>
                         {external || "no external link"}
                         <span>
