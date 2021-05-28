@@ -19,7 +19,8 @@
     background-color: #f7f7f7;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    min-width: 75%;
+    width: 73%;
+    padding: 1rem;
     min-height: 600px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 }
