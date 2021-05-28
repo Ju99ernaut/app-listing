@@ -7,7 +7,7 @@ const AppDetail = ({ reviews, app, auth, authorization, user, reload }) => {
     const revs = useRef(null);
     const buttons = useRef(null);
     const { image, by, updated, groups, description } = app;
-    const filterList = groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-active">{filter.trim()}</button>);
+    const filterList = groups.map((filter, i) => <button key={i} name={filter.toLowerCase().trim()} className="btn btn-category">{filter.trim()}</button>);
     const date = new Date(updated);
 
     const switchTab = (e, tab) => {
